@@ -1,4 +1,4 @@
-package com.example.tetrisgame
+package com.batodev.tetrisgirls
 
 import android.annotation.SuppressLint
 import android.content.Context

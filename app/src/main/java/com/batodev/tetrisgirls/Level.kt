@@ -1,4 +1,4 @@
-package com.example.tetrisgame
+package com.batodev.tetrisgirls
 
 class Level {
     companion object {

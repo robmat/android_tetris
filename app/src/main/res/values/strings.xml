@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">TetrisGame</string>
+    <string name="best_score">Best score</string>
+    <string name="current_score">Current score</string>
+    <string name="current_level">Current level</string>
+    <string name="next_pieces">Next pieces</string>
 </resources>

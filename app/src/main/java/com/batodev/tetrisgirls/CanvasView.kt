@@ -1,4 +1,4 @@
-package com.example.tetrisgame
+package com.batodev.tetrisgirls
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -15,7 +15,7 @@ class CanvasView @JvmOverloads constructor(
 ) : View(context, attrs, defStyleAttr) {
 
     @SuppressLint("DrawAllocation")
-    override fun onDraw(canvas: Canvas?) {
+    override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
         val tetroMino = Paint()
         tetroMino.color = Color.GREEN
@@ -27,22 +27,22 @@ class CanvasView @JvmOverloads constructor(
         val bestText = Paint()
         bestText.color = Color.LTGRAY
         bestText.textSize = 100f
-        canvas?.drawText(Level.best.toString(), 815f, 180f, bestText)
+        canvas.drawText(Level.best.toString(), 815f, 180f, bestText)
 
         val scoreText = Paint()
         scoreText.color = Color.LTGRAY
         scoreText.textSize = 100f
-        canvas?.drawText(Level.score.toString(), 815f, 390f, scoreText)
+        canvas.drawText(Level.score.toString(), 815f, 390f, scoreText)
 
         val levelText = Paint()
         levelText.color = Color.LTGRAY
         levelText.textSize = 100f
-        canvas?.drawText(Level.level.toString(), 815f, 605f, levelText)
+        canvas.drawText(Level.level.toString(), 815f, 605f, levelText)
 
         // help -> left x, top y, right x+100, bottom y +100
 
         // draw level background
-        canvas?.drawRect(1f, 1f, 797f, 1597f, level)
+        canvas.drawRect(1f, 1f, 797f, 1597f, level)
 
         // fill level with tetrimonos
         for (i in 2..21) {
@@ -62,7 +62,7 @@ class CanvasView @JvmOverloads constructor(
                     8 -> tetroMino.color = Color.rgb(255, 0, 0)        // Z
                 }
                 tetroMino.alpha = 1000 // reset default
-                canvas?.drawRect(
+                canvas.drawRect(
                     Level.X[i][j] + 1,
                     Level.Y[i][j] + 1,
                     Level.X[i][j] + 76,
@@ -86,7 +86,7 @@ class CanvasView @JvmOverloads constructor(
                     8 -> tetroMino.color = Color.rgb(255, 0, 0)        // Z
                 }
                 tetroMino.alpha = 1000 // reset default
-                canvas?.drawRect(
+                canvas.drawRect(
                     Level.next2X[i][j] + 1,
                     Level.next2Y[i][j] + 1,
                     Level.next2X[i][j] + 48,
@@ -109,7 +109,7 @@ class CanvasView @JvmOverloads constructor(
                     8 -> tetroMino.color = Color.rgb(255, 0, 0)        // Z
                 }
                 tetroMino.alpha = 1000 // reset default
-                canvas?.drawRect(
+                canvas.drawRect(
                     Level.next3X[i][j] + 1,
                     Level.next3Y[i][j] + 1,
                     Level.next3X[i][j] + 48,
@@ -131,7 +131,7 @@ class CanvasView @JvmOverloads constructor(
                     8 -> tetroMino.color = Color.rgb(255, 0, 0)        // Z
                 }
                 tetroMino.alpha = 1000 // reset default
-                canvas?.drawRect(
+                canvas.drawRect(
                     Level.next4X[i][j] + 1,
                     Level.next4Y[i][j] + 1,
                     Level.next4X[i][j] + 48,

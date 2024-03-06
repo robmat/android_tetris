@@ -1,4 +1,4 @@
-package com.example.tetrisgame
+package com.batodev.tetrisgirls
 
 class Rotate {
     companion object {

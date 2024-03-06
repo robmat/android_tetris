@@ -7,7 +7,7 @@
     android:background="#000000"
     tools:context=".MainActivity">
 
-    <com.example.tetrisgame.CanvasView
+    <com.batodev.tetrisgirls.CanvasView
         android:id="@+id/canvas"
         android:layout_width="wrap_content"
         android:layout_height="609dp"
@@ -21,7 +21,7 @@
         android:layout_marginStart="310dp"
         android:alpha="0.5"
         android:fontFamily="sans-serif-condensed"
-        android:text="Best"
+        android:text="@string/best_score"
         android:textColor="#FFFFFF"
         android:textSize="30sp"
         app:layout_constraintStart_toStartOf="@+id/canvas"
@@ -34,7 +34,7 @@
         android:layout_marginTop="40dp"
         android:alpha="0.5"
         android:fontFamily="sans-serif-condensed"
-        android:text="Score"
+        android:text="@string/current_score"
         android:textColor="#FFFFFF"
         android:textSize="30sp"
         app:layout_constraintStart_toStartOf="@+id/s"
@@ -47,7 +47,7 @@
         android:layout_marginTop="40dp"
         android:alpha="0.5"
         android:fontFamily="sans-serif-condensed"
-        android:text="Level"
+        android:text="@string/current_level"
         android:textColor="#FFFFFF"
         android:textSize="30sp"
         app:layout_constraintStart_toStartOf="@+id/l"
@@ -60,7 +60,7 @@
         android:layout_marginTop="40dp"
         android:alpha="0.5"
         android:fontFamily="sans-serif-condensed"
-        android:text="Next"
+        android:text="@string/next_pieces"
         android:textColor="#FFFFFF"
         android:textSize="30sp"
         app:layout_constraintStart_toStartOf="@+id/l"
@@ -77,7 +77,8 @@
         android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/canvas"
-        app:srcCompat="@drawable/left" />
+        app:srcCompat="@drawable/left"
+        android:contentDescription="@string/app_name" />
 
     <ImageButton
         android:id="@+id/button_right"
@@ -88,7 +89,8 @@
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toTopOf="@+id/button_fast_down"
         app:layout_constraintStart_toEndOf="@+id/button_fast_down"
-        app:srcCompat="@drawable/right" />
+        app:srcCompat="@drawable/right"
+        android:contentDescription="@string/app_name" />
 
     <ImageButton
         android:id="@+id/button_rotate"
@@ -102,7 +104,8 @@
         android:scaleType="centerCrop"
         app:layout_constraintStart_toEndOf="@+id/button_right"
         app:layout_constraintTop_toBottomOf="@+id/canvas"
-        app:srcCompat="@drawable/rotate" />
+        app:srcCompat="@drawable/rotate"
+        android:contentDescription="@string/app_name" />
 
     <ImageButton
         android:id="@+id/button_fast_down"
@@ -113,6 +116,7 @@
         android:scaleType="centerCrop"
         app:layout_constraintStart_toEndOf="@+id/button_left"
         app:layout_constraintTop_toBottomOf="@+id/button_left"
-        app:srcCompat="@drawable/down" />
+        app:srcCompat="@drawable/down"
+        android:contentDescription="@string/app_name" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
