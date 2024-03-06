@@ -22,6 +22,7 @@ class Rotate {
                             Level.insertNewPosition()
                             Tetromino.shapeDirection = 2
                         }
+
                         2 -> {
                             // 0  1  2  3          .  0  .  .
                             // .  .  .  .          .  1  .  .
@@ -40,9 +41,11 @@ class Rotate {
                         }
                     }
                 }
+
                 "O" -> {
                     // do nothing
                 }
+
                 "T" -> {
                     when (Tetromino.shapeDirection) {
                         1 -> {
@@ -59,6 +62,7 @@ class Rotate {
                             Level.insertNewPosition()
                             Tetromino.shapeDirection = 2
                         }
+
                         2 -> {
                             // .  0  .          .  3  .
                             // 3  1  .          2  1  0
@@ -74,6 +78,7 @@ class Rotate {
                             Level.insertNewPosition()
                             Tetromino.shapeDirection = 3
                         }
+
                         3 -> {
                             // .  3  .          .  2  .
                             // 2  1  0          .  1  3
@@ -89,6 +94,7 @@ class Rotate {
                             Level.insertNewPosition()
                             Tetromino.shapeDirection = 4
                         }
+
                         4 -> {
                             // .  2  .          0  1  2
                             // .  1  3          .  3  .
@@ -105,6 +111,7 @@ class Rotate {
                         }
                     }
                 }
+
                 "J" -> {
                     when (Tetromino.shapeDirection) {
                         1 -> {
@@ -122,6 +129,7 @@ class Rotate {
                             Level.insertNewPosition()
                             Tetromino.shapeDirection = 2
                         }
+
                         2 -> {
                             // .  0  .          3  .  .
                             // .  1  .          2  1  0
@@ -137,6 +145,7 @@ class Rotate {
                             Level.insertNewPosition()
                             Tetromino.shapeDirection = 3
                         }
+
                         3 -> {
                             // 3  .  .          2  3  .
                             // 2  1  0          1  .  .
@@ -151,6 +160,7 @@ class Rotate {
                             Level.insertNewPosition()
                             Tetromino.shapeDirection = 4
                         }
+
                         4 -> {
                             // 2  3  .          0  1  2
                             // 1  .  .          .  .  3
@@ -168,6 +178,7 @@ class Rotate {
                         }
                     }
                 }
+
                 "L" -> {
                     when (Tetromino.shapeDirection) {
                         1 -> {
@@ -184,6 +195,7 @@ class Rotate {
                             Level.insertNewPosition()
                             Tetromino.shapeDirection = 2
                         }
+
                         2 -> {
                             // 3  0  .          .  .  3
                             // .  1  .          2  1  0
@@ -198,6 +210,7 @@ class Rotate {
                             Level.insertNewPosition()
                             Tetromino.shapeDirection = 3
                         }
+
                         3 -> {
                             // .  .  3          2  .  .
                             // 2  1  0          1  .  .
@@ -213,6 +226,7 @@ class Rotate {
                             Level.insertNewPosition()
                             Tetromino.shapeDirection = 4
                         }
+
                         4 -> {
                             // 2  .  .          0  1  2
                             // 1  .  .          3  .  .
@@ -230,6 +244,7 @@ class Rotate {
                         }
                     }
                 }
+
                 "S" -> {
                     when (Tetromino.shapeDirection) {
                         1 -> {
@@ -246,6 +261,7 @@ class Rotate {
                             Level.insertNewPosition()
                             Tetromino.shapeDirection = 2
                         }
+
                         2 -> {
                             // 2  .  .          .  0  1
                             // 3  0  .          2  3  .
@@ -262,6 +278,7 @@ class Rotate {
                         }
                     }
                 }
+
                 "Z" -> {
                     when (Tetromino.shapeDirection) {
                         1 -> {
@@ -278,6 +295,7 @@ class Rotate {
                             Level.insertNewPosition()
                             Tetromino.shapeDirection = 2
                         }
+
                         2 -> {
                             // .  0  .          0  1  .
                             // 2  1  .          .  2  3
@@ -324,6 +342,7 @@ class Rotate {
                             )
                                 return false
                         }
+
                         2 -> {
                             // .  0  .  .          0  -  2  3
                             // .  1  .  .          .  .  .  .
@@ -342,9 +361,11 @@ class Rotate {
                         }
                     }
                 }
+
                 "O" -> {
                     // do nothing, there is no rotation
                 }
+
                 "T" -> {
                     when (Tetromino.shapeDirection) {
                         1 -> {
@@ -360,6 +381,7 @@ class Rotate {
                                 return false
 
                         }
+
                         2 -> {
                             // .  0  .          .  -  .
                             // 3  1  .          -  -  0
@@ -369,6 +391,7 @@ class Rotate {
                                 Level.Z[Tetromino.tetromino_Xpos[0] + 1][Tetromino.tetromino_Ypos[0] + 1] > 1
                             ) return false
                         }
+
                         3 -> {
                             // .  3  .          .  -  .
                             // 2  1  0          .  -  -
@@ -382,6 +405,7 @@ class Rotate {
 
 
                         }
+
                         4 -> {
                             // .  2  .          0  -  2
                             // .  1  3          .  -  .
@@ -395,6 +419,7 @@ class Rotate {
                         }
                     }
                 }
+
                 "J" -> {
                     when (Tetromino.shapeDirection) {
                         1 -> {
@@ -409,6 +434,7 @@ class Rotate {
                                 Level.Z[Tetromino.tetromino_Xpos[3] + 1][Tetromino.tetromino_Ypos[3] - 2] > 1
                             ) return false
                         }
+
                         2 -> {
                             // .  0  .          3  .  .
                             // .  1  .          2  -  0
@@ -421,6 +447,7 @@ class Rotate {
                                 Level.Z[Tetromino.tetromino_Xpos[3] - 2][Tetromino.tetromino_Ypos[3] + 0] > 1
                             ) return false
                         }
+
                         3 -> {
                             // 3  .  .          -  3  .
                             // 2  1  0          -  .  .
@@ -432,6 +459,7 @@ class Rotate {
                                 Level.Z[Tetromino.tetromino_Xpos[3]][Tetromino.tetromino_Ypos[3] + 1] > 1
                             ) return false
                         }
+
                         4 -> {
                             // 2  3  .          -  -  2
                             // 1  .  .          .  .  3
@@ -445,6 +473,7 @@ class Rotate {
                         }
                     }
                 }
+
                 "L" -> {
                     when (Tetromino.shapeDirection) {
                         1 -> {
@@ -458,6 +487,7 @@ class Rotate {
                                 Level.Z[Tetromino.tetromino_Xpos[2] + 2][Tetromino.tetromino_Ypos[2] - 1] > 1
                             ) return false
                         }
+
                         2 -> {
                             // 3  0  .          .  .  3
                             // .  1  .          2  -  0
@@ -470,6 +500,7 @@ class Rotate {
                                 Level.Z[Tetromino.tetromino_Xpos[3]][Tetromino.tetromino_Ypos[3] + 2] > 1
                             ) return false
                         }
+
                         3 -> {
                             // .  .  3          2  .  .
                             // 2  1  0          -  .  .
@@ -482,6 +513,7 @@ class Rotate {
                                 Level.Z[Tetromino.tetromino_Xpos[3] + 2][Tetromino.tetromino_Ypos[3] - 1] > 1
                             ) return false
                         }
+
                         4 -> {
                             // 2  .  .          -  1  2
                             // 1  .  .          -  .  .
@@ -495,6 +527,7 @@ class Rotate {
                         }
                     }
                 }
+
                 "S" -> {
                     when (Tetromino.shapeDirection) {
                         1 -> {
@@ -509,6 +542,7 @@ class Rotate {
                             ) return false
 
                         }
+
                         2 -> {
                             // 2  .  .          .  0  1
                             // 3  0  .          -  -  .
@@ -522,6 +556,7 @@ class Rotate {
                         }
                     }
                 }
+
                 "Z" -> {
                     when (Tetromino.shapeDirection) {
                         1 -> {
@@ -535,6 +570,7 @@ class Rotate {
                                 Level.Z[Tetromino.tetromino_Xpos[3] + 1][Tetromino.tetromino_Ypos[3] - 2] > 1
                             ) return false
                         }
+
                         2 -> {
                             // .  0  .          0  -  .
                             // 2  1  .          .  -  3

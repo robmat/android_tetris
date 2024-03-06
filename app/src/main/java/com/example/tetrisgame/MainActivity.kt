@@ -1,23 +1,30 @@
 package com.example.tetrisgame
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.ActivityInfo
-import androidx.appcompat.app.AppCompatActivity
+import android.os.Build
 import android.os.Bundle
-import android.view.View
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.coroutines.*
+import android.view.WindowInsets.Type
+import androidx.appcompat.app.AppCompatActivity
+import kotlinx.android.synthetic.main.activity_main.button_fast_down
+import kotlinx.android.synthetic.main.activity_main.button_left
+import kotlinx.android.synthetic.main.activity_main.button_right
+import kotlinx.android.synthetic.main.activity_main.button_rotate
+import kotlinx.android.synthetic.main.activity_main.canvas
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
-
-    //todo
-    // milyen iranyba erkezzenek a darabok
-    // a next is talaljon az irannyal
-
+    @SuppressLint("SourceLockedOrientationActivity")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            window.insetsController?.hide(Type.statusBars())
+        }
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         supportActionBar?.hide()
 
@@ -49,7 +56,7 @@ class MainActivity : AppCompatActivity() {
         game()
     }
 
-    public fun game() {
+    private fun game() {
         CoroutineScope(Dispatchers.IO).launch {
             // todo eliminate this
             Level.reset()
@@ -83,12 +90,13 @@ class MainActivity : AppCompatActivity() {
         val sharedPreference = getSharedPreferences("HIGH_SCORE", Context.MODE_PRIVATE)
         Level.best = sharedPreference.getInt("high_score", 0)
     }
-    private fun resetBest(){
+
+    private fun resetBest() {
         val sharedPreference = getSharedPreferences("HIGH_SCORE", Context.MODE_PRIVATE)
         if (Level.score > sharedPreference.getInt("high_score", 0)) {
-            var editor = sharedPreference.edit()
+            val editor = sharedPreference.edit()
             editor.putInt("high_score", Level.score)
-            editor.commit()
+            editor.apply()
             Level.best = sharedPreference.getInt("high_score", 0)
         }
     }

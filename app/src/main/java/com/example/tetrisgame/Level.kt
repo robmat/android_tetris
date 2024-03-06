@@ -213,7 +213,7 @@ class Level {
             }
         }
 
-        fun removeRow(index: Int) {
+        private fun removeRow(index: Int) {
             // clean that row
             for (i in 0..9)
                 Z[index][i] = 0

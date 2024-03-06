@@ -66,6 +66,7 @@ class Falling {
                         }
                     }
                 }
+
                 "O" -> {
                     // .  0  1  .
                     // . [2][3]  .
@@ -77,6 +78,7 @@ class Falling {
                     )
                         return true
                 }
+
                 "T" -> {
                     when (Tetromino.shapeDirection) {
                         1 -> {
@@ -90,6 +92,7 @@ class Falling {
                             )
                                 return true
                         }
+
                         2 -> {
                             // .  0  .
                             //[3] 1  .
@@ -100,6 +103,7 @@ class Falling {
                             )
                                 return true
                         }
+
                         3 -> {
                             // .  3  .
                             //[2][1][0]
@@ -111,6 +115,7 @@ class Falling {
                             )
                                 return true
                         }
+
                         4 -> {
                             // .  2  .
                             // .  1 [3]
@@ -123,6 +128,7 @@ class Falling {
                         }
                     }
                 }
+
                 "J" -> {
                     when (Tetromino.shapeDirection) {
                         1 -> {
@@ -136,6 +142,7 @@ class Falling {
                             )
                                 return true
                         }
+
                         2 -> {
                             // .  0  .
                             // .  1  .
@@ -146,6 +153,7 @@ class Falling {
                             )
                                 return true
                         }
+
                         3 -> {
                             // 3  .  .
                             //[2][1][0]
@@ -157,6 +165,7 @@ class Falling {
                             )
                                 return true
                         }
+
                         4 -> {
                             // 2 [3] .
                             // 1  .  .
@@ -169,6 +178,7 @@ class Falling {
                         }
                     }
                 }
+
                 "L" -> {
                     when (Tetromino.shapeDirection) {
                         1 -> {
@@ -182,6 +192,7 @@ class Falling {
                             )
                                 return true
                         }
+
                         2 -> {
                             //[3] 0  .
                             // .  1  .
@@ -192,6 +203,7 @@ class Falling {
                             )
                                 return true
                         }
+
                         3 -> {
                             // .  .  3
                             //[2][1][0]
@@ -203,6 +215,7 @@ class Falling {
                             )
                                 return true
                         }
+
                         4 -> {
                             // 2  .  .
                             // 1  .  .
@@ -215,6 +228,7 @@ class Falling {
                         }
                     }
                 }
+
                 "S" -> {
                     when (Tetromino.shapeDirection) {
                         1 -> {
@@ -228,6 +242,7 @@ class Falling {
                             )
                                 return true
                         }
+
                         2 -> {
                             // 2  .  .
                             //[3] 0  .
@@ -240,6 +255,7 @@ class Falling {
                         }
                     }
                 }
+
                 "Z" -> {
                     when (Tetromino.shapeDirection) {
                         1 -> {
@@ -253,6 +269,7 @@ class Falling {
                             )
                                 return true
                         }
+
                         2 -> {
                             // .  0  .
                             // 2 [1] .

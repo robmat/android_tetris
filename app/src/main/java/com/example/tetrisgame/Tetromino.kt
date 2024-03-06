@@ -6,13 +6,13 @@ class Tetromino {
         var tetromino_Xpos = arrayOf(0)
         var tetromino_Ypos = arrayOf(0)
 
-        var actualShape = "";
-        var nextShape = 0;
-        var next2Shape = 0;
-        var next3Shape = 0;
-        var next4Shape = 0;
-        var shapeDirection = 0;
-        var speed: Long = 500;
+        var actualShape = ""
+        private var nextShape = 0
+        var next2Shape = 0
+        var next3Shape = 0
+        var next4Shape = 0
+        var shapeDirection = 0
+        var speed: Long = 500
         var colorCode: Int = 0
 
         fun newPiece() {
@@ -21,14 +21,14 @@ class Tetromino {
             next3Shape = next4Shape
             next4Shape = (1..7).random()
 
-            clearNextPiece(next2Shape,Level.next2Z)
-            insertNextPiece(next2Shape,Level.next2Z)
+            clearNextPiece(Level.next2Z)
+            insertNextPiece(next2Shape, Level.next2Z)
 
-            clearNextPiece(next3Shape,Level.next3Z)
-            insertNextPiece(next3Shape,Level.next3Z)
+            clearNextPiece(Level.next3Z)
+            insertNextPiece(next3Shape, Level.next3Z)
 
-            clearNextPiece(next4Shape,Level.next4Z)
-            insertNextPiece(next4Shape,Level.next4Z)
+            clearNextPiece(Level.next4Z)
+            insertNextPiece(next4Shape, Level.next4Z)
 
             // just for development
             // val random = 1 // I shape
@@ -50,6 +50,7 @@ class Tetromino {
                     //  .  .  .  0  1  2  3  .  .  .
                     //  .  .  .  .  .  .  .  .  .  .
                 }
+
                 2 -> {
                     actualShape = "O"
                     colorCode = 3
@@ -60,6 +61,7 @@ class Tetromino {
                     //  .  .  .  .  0  1  .  .  .  .
                     //  .  .  .  .  2  3  .  .  .  .
                 }
+
                 3 -> {
                     actualShape = "T"
                     colorCode = 4
@@ -70,6 +72,7 @@ class Tetromino {
                     //  .  .  .  0  1  2  .  .  .  .
                     //  .  .  .  .  3  .  .  .  .  .
                 }
+
                 4 -> {
                     actualShape = "J"
                     colorCode = 5
@@ -80,6 +83,7 @@ class Tetromino {
                     //  .  .  .  0  1  2  .  .  .  .
                     //  .  .  .  .  .  3  .  .  .  .
                 }
+
                 5 -> {
                     actualShape = "L"
                     shapeDirection = 1
@@ -90,6 +94,7 @@ class Tetromino {
                     //  .  .  .  0  1  2  .  .  .  .
                     //  .  .  .  3  .  .  .  .  .  .
                 }
+
                 6 -> {
                     actualShape = "S"
                     shapeDirection = 1
@@ -100,6 +105,7 @@ class Tetromino {
                     //  .  .  .  .  0  1  .  .  .  .
                     //  .  .  .  2  3  .  .  .  .  .
                 }
+
                 7 -> {
                     actualShape = "Z"
                     shapeDirection = 1
@@ -121,36 +127,42 @@ class Tetromino {
                     level[2][0] = 2
                     level[3][0] = 2
                 }
+
                 2 -> { // O
                     level[2][0] = 3
                     level[3][0] = 3
                     level[2][1] = 3
                     level[3][1] = 3
                 }
+
                 3 -> { // T
                     level[1][0] = 4
                     level[2][0] = 4
                     level[3][0] = 4
                     level[2][1] = 4
                 }
+
                 4 -> { // J
                     level[1][1] = 5
                     level[2][1] = 5
                     level[3][1] = 5
                     level[3][0] = 5
                 }
+
                 5 -> { // L
                     level[1][0] = 6
                     level[2][0] = 6
                     level[3][0] = 6
                     level[3][1] = 6
                 }
+
                 6 -> { // S
                     level[3][0] = 7
                     level[3][1] = 7
                     level[2][1] = 7
                     level[2][2] = 7
                 }
+
                 7 -> { // Z
                     level[3][1] = 8
                     level[3][2] = 8
@@ -159,7 +171,8 @@ class Tetromino {
                 }
             }
         }
-        private fun clearNextPiece(nextShape: Int, level: Array<Array<Int>>){
+
+        private fun clearNextPiece(level: Array<Array<Int>>) {
             for (i in 0..3) {
                 for (j in 0..2) {
                     level[i][j] = 0

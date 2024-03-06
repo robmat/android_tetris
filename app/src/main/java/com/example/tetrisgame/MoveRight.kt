@@ -42,6 +42,7 @@ class MoveRight {
                             )
                                 return false
                         }
+
                         2 -> {
                             // .  0  .  .
                             // .  1  .  .
@@ -55,6 +56,7 @@ class MoveRight {
                         }
                     }
                 }
+
                 "O" -> {
                     // .  0  1  .
                     // .  2 [3]  .
@@ -65,6 +67,7 @@ class MoveRight {
                     )
                         return false
                 }
+
                 "T" -> {
                     when (Tetromino.shapeDirection) {
                         1 -> {
@@ -77,6 +80,7 @@ class MoveRight {
                             )
                                 return false
                         }
+
                         2 -> {
                             // . [0]  .
                             // 3  1  .
@@ -87,6 +91,7 @@ class MoveRight {
                             )
                                 return false
                         }
+
                         3 -> {
                             // . [3] .
                             // 2  1 [0]
@@ -97,6 +102,7 @@ class MoveRight {
                             )
                                 return false
                         }
+
                         4 -> {
                             // . [2] .
                             // .  1 [3]
@@ -109,6 +115,7 @@ class MoveRight {
                         }
                     }
                 }
+
                 "J" -> {
                     when (Tetromino.shapeDirection) {
                         1 -> {
@@ -121,6 +128,7 @@ class MoveRight {
                             )
                                 return false
                         }
+
                         2 -> {
                             // . [0]  .
                             // . [1]  .
@@ -132,6 +140,7 @@ class MoveRight {
                             )
                                 return false
                         }
+
                         3 -> {
                             //[3] .  .
                             // 2  1 [0]
@@ -142,6 +151,7 @@ class MoveRight {
                             )
                                 return false
                         }
+
                         4 -> {
                             // 2 [3] .
                             //[1] .  .
@@ -155,6 +165,7 @@ class MoveRight {
                         }
                     }
                 }
+
                 "L" -> {
                     when (Tetromino.shapeDirection) {
                         1 -> {
@@ -167,6 +178,7 @@ class MoveRight {
                             )
                                 return false
                         }
+
                         2 -> {
                             // 3 [0] .
                             // . [1] .
@@ -178,6 +190,7 @@ class MoveRight {
                             )
                                 return false
                         }
+
                         3 -> {
                             // .  . [3]
                             // 2  1 [0]
@@ -188,6 +201,7 @@ class MoveRight {
                             )
                                 return false
                         }
+
                         4 -> {
                             //[2] .  .
                             //[1] .  .
@@ -201,6 +215,7 @@ class MoveRight {
                         }
                     }
                 }
+
                 "S" -> {
                     when (Tetromino.shapeDirection) {
                         1 -> {
@@ -213,6 +228,7 @@ class MoveRight {
                             )
                                 return false
                         }
+
                         2 -> {
                             //[2] .  .
                             // 3 [0] .
@@ -226,6 +242,7 @@ class MoveRight {
                         }
                     }
                 }
+
                 "Z" -> {
                     when (Tetromino.shapeDirection) {
                         1 -> {
@@ -238,6 +255,7 @@ class MoveRight {
                             )
                                 return false
                         }
+
                         2 -> {
                             // . [0] .
                             // 2 [1] .
