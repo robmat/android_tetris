@@ -32,6 +32,7 @@ open class HideStatusBarActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
+        super.onBackPressed()
         AlertDialog.Builder(this)
             .setTitle(R.string.warning)
             .setMessage(R.string.quitAppMessage)

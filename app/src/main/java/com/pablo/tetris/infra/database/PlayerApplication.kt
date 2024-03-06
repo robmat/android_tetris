@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModelStore
 import androidx.lifecycle.ViewModelStoreOwner
 import com.google.android.material.color.DynamicColors
 
-class PlayerApplication : Application(), ViewModelStoreOwner {
+class PlayerApplication() : Application(), ViewModelStoreOwner {
     val database by lazy { PlayerRoomDatabase.getDatabase(this) }
     val repository by lazy { PlayerRepository(database.playerDao()) }
 
@@ -14,12 +14,6 @@ class PlayerApplication : Application(), ViewModelStoreOwner {
         DynamicColors.applyToActivitiesIfAvailable(this)
     }
 
-    private val appViewModelStore: ViewModelStore by lazy {
-        ViewModelStore()
-    }
-
-    override fun getViewModelStore(): ViewModelStore {
-        return appViewModelStore
-    }
-
+    override val viewModelStore: ViewModelStore
+        get() = ViewModelStore()
 }
