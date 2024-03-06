@@ -1,0 +1,101 @@
+<resources>
+    <string name="app_name">Tetris</string>
+    <string name="help_button">Help</string>
+    <string name="start_button">Start</string>
+    <string name="quit_button">Quit</string>
+    <string name="LeftButtonDesc">Move the block to the left</string>
+    <string name="DownButtonDesc">Move the block down</string>
+    <string name="RightButtonDesc">Move the block to the right</string>
+    <string name="RotateLeftDesc">Rotate the block to the left</string>
+    <string name="RotateRightDesc">Rotate the block to the right</string>
+    <string name="DayAndHourText">Day and Hour:</string>
+    <string name="valuesOfLogText">Values of the Log:</string>
+    <string name="emailDestination">Share your score:</string>
+    <string name="sendEmailButton">Send Email</string>
+    <string name="newGameButton">New Game</string>
+    <string name="exitButton">Exit</string>
+    <string name="emailHint">jhondoe@gmail.com</string>
+    <string name="NextBlock">Next:</string>
+    <string name="NextBlockDesc">Shows the next block</string>
+    <string name="PointsText">Points:</string>
+    <string name="checkbox_music">Music</string>
+    <string name="checkbox_ghostblock">Ghost Block</string>
+    <string name="theme_text">Theme:</string>
+    <string name="difficulty_setting_text">Difficulty:</string>
+    <string name="name_text">Name:</string>
+    <string name="hint_name">jhondoe</string>
+    <string name="LowLevelButton">Low</string>
+    <string name="MediumLevelButton">Medium</string>
+    <string name="HighLevelButton">High</string>
+    <string name="pause_info">pause the current status of the game</string>
+    <string name="resumingin">Resuming game…</string>
+    <string name="opening_mail">Opening mail app</string>
+    <string name="error_opening_mail">Error opening mail app!</string>
+    <string name="score">Score:</string>
+    <string name="ok">Ok</string>
+    <string name="cancel">Cancel</string>
+    <string name="quitAppMessage">Do you really want to quit Tetris?</string>
+    <string name="theme_image_information">An image that shows the T block on the current theme</string>
+    <string name="level_image_description">Image that shows the level of difficulty</string>
+    <string name="other_settings_text">Other:</string>
+    <string name="theme_spinner_description">Different theme values</string>
+    <string name="settings_info">Settings</string>
+    <string name="results">Results</string>
+    <string name="information_text">Information</string>
+    <string name="tetris_explanation">In Tetris, players complete lines by moving differently shaped pieces (tetrominoes), which descend onto the playing field. \n\n
+        The completed lines disappear and grant the player points, and the player can proceed to fill the vacated spaces.\n\n
+        The game ends when the playing field is filled. The longer the player can delay this outcome, the higher their score will be.\n\n
+        </string>
+    <string name="go_back_button">Back</string>
+    <string name="warning">Warning!</string>
+    <string name="down_movement">"down movement"</string>
+    <string name="left_movement">"left movement"</string>
+    <string name="right_movement">"right movement"</string>
+    <string name="left_rotation">"left rotation"</string>
+    <string name="right_rotation">"right rotation"</string>
+    <string name="drop_down">"down drop"</string>
+    <string name="player_name_log">"Name of the player is: %s"</string>
+    <string name="level_selected_log">"Level selected is: %s"</string>
+    <string name="ghost_mode_log">"Ghost mode is enabled? %s"</string>
+    <string name="music_mode_log">"Music is enabled? %s"</string>
+    <string name="theme_log">"Playing with theme: %s"</string>
+    <string name="result_movements_log">Did a: %s %d times</string>
+
+    <string name="error_name_is_empty">Name cannot be empty</string>
+    <string name="error_name_contain_spaces">Name should not contain spaces</string>
+    <string name="error_email_empty">email shouldn\'t be blank</string>
+    <string name="error_email_not_valid">email isn\'t valid</string>
+
+    <!-- Sync Preferences -->
+    <string name="ghost_block_mode_on" >Don\'t show the shadow of the block</string>
+    <string name="ghost_block_mode_off" >Show the shadow of the block, so you can see where it will go</string>
+    <string name="audio_and_image" >Audio and image</string>
+    <string name="player_text" >Player:</string>
+    <string name="name_default" >Player1</string>
+    <string name="historial">Historial</string>
+    <string name="deleted_player_game" >Deleted player game</string>
+    <string name="deletion_canceled" >Deletion canceled!</string>
+    <string name="delete_game_warning" >Are you sure you want to delete the game from %s?</string>
+    <string name="error_name_length_is_out_of_bounds" >Name is too large!</string>
+    <string name="error_name_has_to_be_one_line" >Name has to be one line</string>
+    <string name="search">search</string>
+    <string name="filter_by_name">Filter by name</string>
+    <string name="please_click_item">Please, click on an item for see the log</string>
+    <string name="no_items_in_database">There are no items on database, can\'t show the log!</string>
+
+    <string name="key_name" translatable="false">name</string>
+    <string name="key_difficulty" translatable="false">difficulty</string>
+    <string name="key_music" translatable="false">music</string>
+    <string name="key_ghost" translatable="false">ghost_block</string>
+    <string name="key_theme" translatable="false">theme</string>
+    <string name="low_key" translatable="false">LOW</string>
+    <string name="medium_key" translatable="false">MEDIUM</string>
+    <string name="high_key" translatable="false">HIGH</string>
+    <string name="neon_key" translatable="false">NEON</string>
+    <string name="saturated_key" translatable="false">SATURATED</string>
+
+    <string-array name="recycle_view_actions">
+        <item>Show game sorted by points</item>
+        <item>Show game sorted by date</item>
+    </string-array>
+</resources>
