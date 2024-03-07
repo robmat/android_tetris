@@ -6,7 +6,6 @@ import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.os.Bundle
 import android.view.View
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import com.pablo.tetris.R
 import com.pablo.tetris.databinding.ActivityMainBinding
 import com.pablo.tetris.presentation.common.HideStatusBarActivity
 import com.pablo.tetris.presentation.common.getButtons
@@ -28,22 +27,28 @@ class MainActivity : HideStatusBarActivity(), View.OnClickListener {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.root.getButtons().forEach { it.setOnClickListener(this) }
-//        binding.toolbar.inflateMenu(R.menu.settings_menu)
-//        binding.toolbar.setOnMenuItemClickListener {
-//            if (it.itemId == R.id.settings) {
-//                startActivity(Intent(this, SettingsActivity::class.java))
-//                true
-//            } else {
-//                false
-//            }
-//        }
     }
 
     override fun onClick(p0: View) {
         when (p0.id) {
             binding.mainMenuActivityPlayTheGame.id -> startGameActivity()
+            binding.mainMenuActivityMoreApps.id -> moreApps()
+            binding.mainMenuActivitySettings.id -> settings()
+            binding.mainMenuActivityUnlockedGallery.id -> gallery()
             else -> throw IllegalArgumentException("Unknown button id: ${p0.id}")
         }
+    }
+
+    private fun settings() {
+        startActivity(Intent(this, SettingsActivity::class.java))
+    }
+
+    private fun gallery() {
+
+    }
+
+    private fun moreApps() {
+
     }
 
     private fun startGameActivity() {

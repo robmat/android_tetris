@@ -6,9 +6,9 @@
     android:layout_height="match_parent"
     tools:context=".presentation.settings.SettingsActivity">
 
-    <fragment
+    <androidx.fragment.app.FragmentContainerView
         android:id = "@+id/fragment_settings"
-        class = "com.pablo.tetris.presentation.settings.SettingsFragment"
+        android:name="com.pablo.tetris.presentation.settings.SettingsFragment"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -16,5 +16,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/settings_activity_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_background"
+        android:fontFamily="serif-monospace"
+        android:soundEffectsEnabled="true"
+        android:text="@string/settings_activity_back"
+        android:textSize="25sp"
+        app:layout_constraintBottom_toBottomOf="@+id/fragment_settings"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="100dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
