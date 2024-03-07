@@ -28,21 +28,20 @@ class MainActivity : HideStatusBarActivity(), View.OnClickListener {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.root.getButtons().forEach { it.setOnClickListener(this) }
-        binding.toolbar.inflateMenu(R.menu.settings_menu)
-        binding.toolbar.setOnMenuItemClickListener {
-            if (it.itemId == R.id.settings) {
-                startActivity(Intent(this, SettingsActivity::class.java))
-                true
-            } else {
-                false
-            }
-        }
+//        binding.toolbar.inflateMenu(R.menu.settings_menu)
+//        binding.toolbar.setOnMenuItemClickListener {
+//            if (it.itemId == R.id.settings) {
+//                startActivity(Intent(this, SettingsActivity::class.java))
+//                true
+//            } else {
+//                false
+//            }
+//        }
     }
 
     override fun onClick(p0: View) {
         when (p0.id) {
-            binding.startButton.id -> startGameActivity()
-            binding.quitButton.id -> finish()
+            binding.mainMenuActivityPlayTheGame.id -> startGameActivity()
             else -> throw IllegalArgumentException("Unknown button id: ${p0.id}")
         }
     }

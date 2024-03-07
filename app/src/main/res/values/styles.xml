@@ -36,6 +36,10 @@
         <item name="android:textAppearance">?attr/textAppearanceBody1</item>
     </style>
 
+    <style name="main_menu_button">
+        <item name="android:background">@drawable/btn_default</item>
+    </style>
+
     <style name="movebuttonspadding">
         <item name="android:layout_marginLeft">5dp</item>
         <item name="android:layout_marginRight">5dp</item>
