@@ -10,7 +10,7 @@
 /captures
 .externalNativeBuild
 .cxx
-local.properties
+
 # Gradle files
 .gradle/
 build/
@@ -44,3 +44,10 @@ google-services.json
 
 # Android Profiling
 *.hprof
+
+/app/src/main/assets/pics/tier1/*.png
+/app/src/main/assets/pics/tier1/*.jpg
+/app/src/main/assets/pics/tier2/*.png
+/app/src/main/assets/pics/tier2/*.jpg
+/app/src/main/assets/pics/tier3/*.png
+/app/src/main/assets/pics/tier3/*.jpg
