@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/fragmentContainerView"
-        class="com.pablo.tetris.presentation.game.fragments.GameFragment"
+        class="com.batodev.tetris.presentation.game.fragments.GameFragment"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         app:layout_constraintBottom_toBottomOf="parent"

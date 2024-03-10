@@ -8,7 +8,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id = "@+id/fragment_settings"
-        android:name="com.pablo.tetris.presentation.settings.SettingsFragment"
+        android:name="com.batodev.tetris.presentation.settings.SettingsFragment"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         app:layout_constraintBottom_toBottomOf="parent"

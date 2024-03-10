@@ -9,7 +9,7 @@ android {
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.pablo.tetris"
+        applicationId "com.batodev.tetris"
         minSdk 23
         targetSdk 34
         versionCode 1
@@ -35,7 +35,7 @@ android {
     kotlinOptions {
         jvmTarget = '17'
     }
-    namespace 'com.pablo.tetris'
+    namespace 'com.batodev.tetris'
 }
 
 dependencies {

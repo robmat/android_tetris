@@ -170,7 +170,7 @@
         </LinearLayout>
 
 
-        <com.pablo.tetris.presentation.game.PlayPauseView
+        <com.batodev.tetris.presentation.game.PlayPauseView
             android:id="@+id/pauseButton"
             android:layout_width="52dp"
             android:layout_height="43dp"
