@@ -1,6 +1,7 @@
 package com.batodev.tetris.presentation.game.fragments
 
 import android.content.Intent
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.batodev.tetris.R
+import com.batodev.tetris.infra.images.ImageData
 import com.batodev.tetris.infra.images.ImageHelper
 import com.batodev.tetris.presentation.common.GAME_RESULT
 import com.batodev.tetris.presentation.common.getButtons
@@ -35,11 +37,13 @@ class GameFragment : Fragment(), View.OnClickListener {
     private lateinit var model: GameViewModel
     private lateinit var resumeAction: Action
     private lateinit var moveBlockDown: Job
+    private lateinit var imageData: ImageData
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setUpViewModel()
-        setUpGridView()
+        imageData = ImageHelper.pickTierOneImage(requireActivity())
+        setUpViewModel(imageData.fileName)
+        setUpGridView(imageData.bitmap)
         setUpButtons()
         setUpResumeAction()
         setUpLogger()
@@ -52,10 +56,11 @@ class GameFragment : Fragment(), View.OnClickListener {
         return inflater.inflate(R.layout.fragment_game, container, false)
     }
 
-    private fun setUpViewModel() {
-        model = ViewModelProvider(requireActivity()).get(GameViewModel::class.java)
+    private fun setUpViewModel(imageName: String) {
+        model = ViewModelProvider(requireActivity())[GameViewModel::class.java]
         model.setUp(SettingsSingleton.getFacade(requireContext()), SettingsSingleton.getSpeedStrategy(requireContext()))
         model.setUpMusic(SettingsSingleton.getSettingsData(requireContext()).hasMusic, requireContext())
+        model.setUpImage(imageData.fileName)
         model.gameFacade.observe(viewLifecycleOwner) {
             if (!it.hasFinished())
                 updateScreen()
@@ -64,14 +69,11 @@ class GameFragment : Fragment(), View.OnClickListener {
         }
     }
 
-    private fun setUpGridView() {
+    private fun setUpGridView(bitmap: Bitmap) {
         val cellColors = SettingsSingleton.getStyleCreator(requireContext()).getColorCellChooser()
         adapter = GameAdapter(model.getGrid(), cellColors)
         requireView().findViewById<GridView>(R.id.GameGrid).adapter = adapter
-        val imageData = activity?.let {
-            ImageHelper.pickTierOneImage(it)
-        }
-        requireView().findViewById<ImageView>(R.id.GameImage).setImageBitmap(imageData!!.bitmap)
+        requireView().findViewById<ImageView>(R.id.GameImage).setImageBitmap(bitmap)
     }
 
     private fun setUpLogger() {

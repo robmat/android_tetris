@@ -1,4 +1,4 @@
-package com.batodev.tetris.infra.images;
+package com.batodev.tetris.infra.images
 
 import android.app.Activity
 import android.graphics.Bitmap
@@ -11,6 +11,8 @@ import android.graphics.Rect
 import android.graphics.RectF
 
 import com.batodev.tetris.infra.settings.SettingsHelper
+import java.math.BigDecimal
+import java.math.RoundingMode
 
 object ImageHelper {
     fun pickTierOneImage(activity: Activity): ImageData {
@@ -34,10 +36,38 @@ object ImageHelper {
         val imagesToPickFrom = assetImages.filter { uncoveredImages.contains(it) }
         val imageName =
             if (imagesToPickFrom.isEmpty()) assetImages.random() else imagesToPickFrom.random()
-        return ImageData(
-            BitmapFactory.decodeStream(activity.assets.open("$imagesPath/$imageName")),
-            imageName
-        )
+        val originalBitmap = BitmapFactory.decodeStream(activity.assets.open("$imagesPath/$imageName"))
+        val croppedBitmap = cropToAspectRatio(originalBitmap)
+        val roundCornersBitmap = getRoundedCornerBitmap(croppedBitmap, 25)
+        return ImageData(roundCornersBitmap, imageName)
+    }
+
+    private fun cropToAspectRatio(bitmap: Bitmap): Bitmap {
+        val aspectRatio: BigDecimal = BigDecimal(275).divide(BigDecimal(550), 5, RoundingMode.HALF_UP)
+        val width = BigDecimal(bitmap.width)
+        val height = BigDecimal(bitmap.height)
+
+        val targetWidth: Int
+        val targetHeight: Int
+
+        // Calculate the dimensions of the cropped region based on the aspect ratio
+        if (width / height > aspectRatio) {
+            targetWidth = (height * aspectRatio).toInt()
+            targetHeight = height.toInt()
+        } else {
+            targetWidth = width.toInt()
+            targetHeight = (width / aspectRatio).toInt()
+        }
+
+        // Calculate the coordinates of the top-left corner of the cropped region
+        val left = (width.toInt() - targetWidth) / 2
+        val top = (height.toInt() - targetHeight) / 2
+
+        // Create a Rect object representing the cropping region
+        val rect = Rect(left, top, left + targetWidth, top + targetHeight)
+
+        // Crop the bitmap to the specified region
+        return Bitmap.createBitmap(bitmap, rect.left, rect.top, rect.width(), rect.height())
     }
 
     fun getRoundedCornerBitmap(bitmap: Bitmap, pixels: Int): Bitmap {

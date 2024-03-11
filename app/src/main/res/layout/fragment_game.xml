@@ -8,12 +8,11 @@
 
     <ImageView
         android:id="@+id/GameImage"
-        android:layout_width="275dp"
-        android:layout_height="550dp"
+        android:layout_width="270dp"
+        android:layout_height="545dp"
         android:horizontalSpacing="0dp"
         android:numColumns="10"
-        android:verticalSpacing="0dp"
-        android:scaleType="centerCrop"
+        android:scaleType="fitCenter"
         android:contentDescription="@string/app_name"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout6"
         app:layout_constraintEnd_toEndOf="parent"

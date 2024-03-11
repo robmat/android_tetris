@@ -20,6 +20,7 @@ class GameViewModel : ViewModel() {
     private val gameOpened: MutableLiveData<Boolean> = MutableLiveData(false)
     private val updatedLog: MutableLiveData<Boolean> = MutableLiveData(false)
     private lateinit var speedStrategy: SpeedStrategy
+    private var imageName: String = ""
 
     fun setUp(gameFacade: GameFacade, speed: SpeedStrategy) {
         if (this.gameFacade.value == null) {
@@ -134,5 +135,8 @@ class GameViewModel : ViewModel() {
     }
 
     private fun validMovement() = !gamePaused.value!! && !gameFacade.value!!.hasFinished()
+    fun setUpImage(fileName: String) {
+        imageName = fileName
+    }
 
 }
