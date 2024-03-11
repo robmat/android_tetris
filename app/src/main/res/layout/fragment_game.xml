@@ -6,12 +6,28 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".presentation.game.fragments.GameFragment">
 
+    <ImageView
+        android:id="@+id/GameImage"
+        android:layout_width="275dp"
+        android:layout_height="550dp"
+        android:horizontalSpacing="0dp"
+        android:numColumns="10"
+        android:verticalSpacing="0dp"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/app_name"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+
     <GridView
         android:id="@+id/GameGrid"
         android:layout_width="275dp"
         android:layout_height="550dp"
         android:horizontalSpacing="0dp"
         android:numColumns="10"
+        android:alpha="0.8"
         android:verticalSpacing="0dp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout6"
         app:layout_constraintEnd_toEndOf="parent"

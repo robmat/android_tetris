@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.batodev.tetris.R
+import com.batodev.tetris.infra.images.ImageHelper
 import com.batodev.tetris.presentation.common.GAME_RESULT
 import com.batodev.tetris.presentation.common.getButtons
 import com.batodev.tetris.presentation.finished.FinishedActivity
@@ -27,7 +28,6 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import java.util.*
 
-@Suppress("OPT_IN_IS_NOT_ENABLED")
 @OptIn(ExperimentalCoroutinesApi::class)
 class GameFragment : Fragment(), View.OnClickListener {
 
@@ -68,6 +68,10 @@ class GameFragment : Fragment(), View.OnClickListener {
         val cellColors = SettingsSingleton.getStyleCreator(requireContext()).getColorCellChooser()
         adapter = GameAdapter(model.getGrid(), cellColors)
         requireView().findViewById<GridView>(R.id.GameGrid).adapter = adapter
+        val imageData = activity?.let {
+            ImageHelper.pickTierOneImage(it)
+        }
+        requireView().findViewById<ImageView>(R.id.GameImage).setImageBitmap(imageData!!.bitmap)
     }
 
     private fun setUpLogger() {
