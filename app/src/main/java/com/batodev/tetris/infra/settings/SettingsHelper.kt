@@ -10,7 +10,7 @@ import java.io.ObjectInputStream
 import java.io.ObjectOutputStream
 
 object SettingsHelper {
-    var settingsData: SettingsData = SettingsData()
+    private var settingsData: SettingsData = SettingsData()
 
     fun load(activity: Activity): SettingsData {
         val settingsFile = settingsFile(activity)

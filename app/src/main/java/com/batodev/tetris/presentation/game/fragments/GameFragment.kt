@@ -3,6 +3,7 @@ package com.batodev.tetris.presentation.game.fragments
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +14,7 @@ import androidx.lifecycle.lifecycleScope
 import com.batodev.tetris.R
 import com.batodev.tetris.infra.images.ImageData
 import com.batodev.tetris.infra.images.ImageHelper
+import com.batodev.tetris.infra.settings.SettingsHelper
 import com.batodev.tetris.presentation.common.GAME_RESULT
 import com.batodev.tetris.presentation.common.getButtons
 import com.batodev.tetris.presentation.finished.FinishedActivity
@@ -25,6 +27,7 @@ import com.batodev.tetris.presentation.game.actions.ResumeToastAction
 import com.batodev.tetris.presentation.game.grid.GameAdapter
 import com.batodev.tetris.presentation.game.results.GameResult
 import kotlinx.coroutines.CoroutineStart
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
@@ -38,12 +41,18 @@ class GameFragment : Fragment(), View.OnClickListener {
     private lateinit var resumeAction: Action
     private lateinit var moveBlockDown: Job
     private lateinit var imageData: ImageData
+    private val tierOneScoreRequired = 200 // 20
+    private val tierTwoScoreRequired = 500 // 50
+    private val tierThreeScoreRequired = 700 // 70
+    private var tierOneImageUncovered = false
+    private var tierTwoImageUncovered = false
+    private var tierThreeImageUncovered = false
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         imageData = ImageHelper.pickTierOneImage(requireActivity())
-        setUpViewModel(imageData.fileName)
-        setUpGridView(imageData.bitmap)
+        setUpViewModel()
+        setUpGridView()
         setUpButtons()
         setUpResumeAction()
         setUpLogger()
@@ -56,24 +65,62 @@ class GameFragment : Fragment(), View.OnClickListener {
         return inflater.inflate(R.layout.fragment_game, container, false)
     }
 
-    private fun setUpViewModel(imageName: String) {
+
+    private fun setUpViewModel() {
         model = ViewModelProvider(requireActivity())[GameViewModel::class.java]
         model.setUp(SettingsSingleton.getFacade(requireContext()), SettingsSingleton.getSpeedStrategy(requireContext()))
         model.setUpMusic(SettingsSingleton.getSettingsData(requireContext()).hasMusic, requireContext())
         model.setUpImage(imageData.fileName)
         model.gameFacade.observe(viewLifecycleOwner) {
-            if (!it.hasFinished())
+            if (!it.hasFinished()) {
                 updateScreen()
-            else
+                checkIfImageIsWon()
+            } else {
                 finishGame()
+            }
+        }
+    }
+    private fun checkIfImageIsWon() {
+        val score = model.gameFacade.value!!.getScore().value
+        Log.d(GameFragment::class.java.simpleName, "Score: $score")
+        if (score >= tierOneScoreRequired && !tierOneImageUncovered) {
+            tierOneImageUncovered = true
+            addImageToUncoveredAndPickNew(2)
+        }
+        if (score >= tierTwoScoreRequired && !tierTwoImageUncovered) {
+            tierTwoImageUncovered = true
+            addImageToUncoveredAndPickNew(3)
+        }
+        if (score >= tierThreeScoreRequired && !tierThreeImageUncovered) {
+            tierThreeImageUncovered = true
+            addImageToUncoveredAndPickNew(3)
         }
     }
 
-    private fun setUpGridView(bitmap: Bitmap) {
+    private fun addImageToUncoveredAndPickNew(newImageTier: Int) {
+        Log.d(GameFragment::class.java.simpleName, "image won newImageTier: $newImageTier")
+        Log.d(GameFragment::class.java.simpleName, "image won imageData.fileName: ${imageData.fileName}")
+        val settingsData = SettingsHelper.load(requireActivity())
+        val imagesWon = settingsData.imagesWon
+        if (!imagesWon.contains(imageData.fileName)) {
+            imagesWon.add(imageData.fileName)
+            SettingsHelper.save(requireActivity(), settingsData )
+        }
+        if (newImageTier == 2) {
+            imageData = ImageHelper.pickTierTwoImage(requireActivity())
+        }
+        if (newImageTier == 3) {
+            imageData = ImageHelper.pickTierThreeImage(requireActivity())
+        }
+        requireView().findViewById<ImageView>(R.id.GameImage).setImageBitmap(imageData.bitmap)
+        Log.d(GameFragment::class.java.simpleName, "new image: ${imageData.fileName}")
+    }
+
+    private fun setUpGridView() {
         val cellColors = SettingsSingleton.getStyleCreator(requireContext()).getColorCellChooser()
         adapter = GameAdapter(model.getGrid(), cellColors)
         requireView().findViewById<GridView>(R.id.GameGrid).adapter = adapter
-        requireView().findViewById<ImageView>(R.id.GameImage).setImageBitmap(bitmap)
+        requireView().findViewById<ImageView>(R.id.GameImage).setImageBitmap(imageData.bitmap)
     }
 
     private fun setUpLogger() {

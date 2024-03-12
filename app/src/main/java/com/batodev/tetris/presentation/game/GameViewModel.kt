@@ -3,6 +3,7 @@ package com.batodev.tetris.presentation.game
 import GameFacade
 import android.content.Context
 import android.media.MediaPlayer
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.batodev.tetris.R
@@ -20,7 +21,7 @@ class GameViewModel : ViewModel() {
     private val gameOpened: MutableLiveData<Boolean> = MutableLiveData(false)
     private val updatedLog: MutableLiveData<Boolean> = MutableLiveData(false)
     private lateinit var speedStrategy: SpeedStrategy
-    private var imageName: String = ""
+    private var imageName: MutableLiveData<String> = MutableLiveData("")
 
     fun setUp(gameFacade: GameFacade, speed: SpeedStrategy) {
         if (this.gameFacade.value == null) {
@@ -31,6 +32,7 @@ class GameViewModel : ViewModel() {
     }
 
     suspend fun runGame() {
+        Log.d(GameViewModel::class.java.simpleName, "run game")
         while (!gameFacade.value!!.hasFinished()) {
             down()
             delay(speedStrategy.getSpeedInMilliseconds(gameFacade.value!!.getScore()))
@@ -136,7 +138,7 @@ class GameViewModel : ViewModel() {
 
     private fun validMovement() = !gamePaused.value!! && !gameFacade.value!!.hasFinished()
     fun setUpImage(fileName: String) {
-        imageName = fileName
+        imageName.value = fileName
     }
 
 }
