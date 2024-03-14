@@ -98,6 +98,7 @@
     <string name="main_menu_activity_more_apps">More apps like this</string>
     <string name="main_menu_activity_settings">Settings</string>
     <string name="settings_activity_back">Go back</string>
+    <string name="newImageInGallery">New image added to the image gallery.</string>
 
     <string-array name="recycle_view_actions">
         <item>Show game sorted by points</item>

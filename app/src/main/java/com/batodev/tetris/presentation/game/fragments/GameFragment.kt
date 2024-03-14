@@ -4,6 +4,7 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,6 +27,7 @@ import com.batodev.tetris.presentation.game.actions.Action
 import com.batodev.tetris.presentation.game.actions.ResumeToastAction
 import com.batodev.tetris.presentation.game.grid.GameAdapter
 import com.batodev.tetris.presentation.game.results.GameResult
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -41,15 +43,17 @@ class GameFragment : Fragment(), View.OnClickListener {
     private lateinit var resumeAction: Action
     private lateinit var moveBlockDown: Job
     private lateinit var imageData: ImageData
-    private val tierOneScoreRequired = 200 // 20
+    private val tierOneScoreRequired = 200 // 200
     private val tierTwoScoreRequired = 500 // 50
     private val tierThreeScoreRequired = 700 // 70
     private var tierOneImageUncovered = false
     private var tierTwoImageUncovered = false
     private var tierThreeImageUncovered = false
+    private lateinit var view: View
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        this.view = view
         imageData = ImageHelper.pickTierOneImage(requireActivity())
         setUpViewModel()
         setUpGridView()
@@ -86,16 +90,28 @@ class GameFragment : Fragment(), View.OnClickListener {
         if (score >= tierOneScoreRequired && !tierOneImageUncovered) {
             tierOneImageUncovered = true
             addImageToUncoveredAndPickNew(2)
+            showTopSnackbar()
         }
         if (score >= tierTwoScoreRequired && !tierTwoImageUncovered) {
             tierTwoImageUncovered = true
             addImageToUncoveredAndPickNew(3)
+            showTopSnackbar()
         }
         if (score >= tierThreeScoreRequired && !tierThreeImageUncovered) {
             tierThreeImageUncovered = true
             addImageToUncoveredAndPickNew(3)
+            showTopSnackbar()
         }
     }
+
+    private fun showTopSnackbar() {
+        val snackbar = Snackbar.make(view, getString(R.string.newImageInGallery), Snackbar.LENGTH_SHORT)
+        val params = snackbar.view.layoutParams as FrameLayout.LayoutParams
+        params.gravity = Gravity.TOP
+        snackbar.view.layoutParams = params
+        snackbar.show()
+    }
+
 
     private fun addImageToUncoveredAndPickNew(newImageTier: Int) {
         Log.d(GameFragment::class.java.simpleName, "image won newImageTier: $newImageTier")
