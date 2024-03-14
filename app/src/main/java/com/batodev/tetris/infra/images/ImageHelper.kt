@@ -11,10 +11,33 @@ import android.graphics.Rect
 import android.graphics.RectF
 
 import com.batodev.tetris.infra.settings.SettingsHelper
+import java.io.InputStream
+import java.lang.Exception
 import java.math.BigDecimal
 import java.math.RoundingMode
 
 object ImageHelper {
+
+    fun imageStreamByName(activity: Activity, name: String): InputStream {
+        val tierOneImages = activity.assets.list("pics/tier1")
+        if (tierOneImages!!.contains(name)) {
+            return activity.assets.open("pics/tier1/$name")
+        }
+        val tierTwoImages = activity.assets.list("pics/tier2")
+        if (tierTwoImages!!.contains(name)) {
+            return activity.assets.open("pics/tier2/$name")
+        }
+        val tierThreeImages = activity.assets.list("pics/tier3")
+        if (tierThreeImages!!.contains(name)) {
+            return activity.assets.open("pics/tier3/$name")
+        }
+        throw Exception("no image by name: $name")
+    }
+
+    fun imageBitmapByName(activity: Activity, name: String): Bitmap {
+        return BitmapFactory.decodeStream(imageStreamByName(activity, name))
+    }
+
     fun pickTierOneImage(activity: Activity): ImageData {
         return pickImage(activity, "pics/tier1")
     }

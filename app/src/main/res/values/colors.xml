@@ -10,6 +10,7 @@
     <color name="black_buttons">#000000</color>
     <color name="purple_splashscreen">#AD7FFF</color>
 
+    <color name="light_grey">#FFEFEFEF</color>
     <color name="vibrant_red">#F61707</color>
     <color name="vibrant_blue">#2196f3</color>
     <color name="vibrant_yellow">#ffeb3b</color>

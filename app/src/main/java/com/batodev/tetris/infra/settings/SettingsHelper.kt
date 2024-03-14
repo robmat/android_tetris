@@ -5,7 +5,6 @@ import android.util.Log
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
-import java.io.InvalidClassException
 import java.io.ObjectInputStream
 import java.io.ObjectOutputStream
 
@@ -23,8 +22,12 @@ object SettingsHelper {
             } else {
                 Log.w(SettingsHelper::class.java.simpleName, "no settings yet, returned defaults")
             }
-        } catch (e: InvalidClassException) {
-            Log.e(SettingsHelper::class.java.simpleName, "classes incompatible, will delete settings", e)
+        } catch (e: Exception) {
+            Log.e(
+                SettingsHelper::class.java.simpleName,
+                "classes incompatible, will delete settings",
+                e
+            )
             settingsFile.delete()
         }
         return settingsData
@@ -32,11 +35,21 @@ object SettingsHelper {
 
     fun save(activity: Activity, settingsData: SettingsData): SettingsData {
         val settingsFile = settingsFile(activity)
-        val fos = FileOutputStream(settingsFile)
-        ObjectOutputStream(fos).use {
-            it.writeObject(settingsData)
+        return try {
+            val fos = FileOutputStream(settingsFile)
+            ObjectOutputStream(fos).use {
+                it.writeObject(settingsData)
+            }
+            settingsData
+        } catch (e: Exception) {
+            Log.e(
+                SettingsHelper::class.java.simpleName,
+                "classes incompatible, will delete settings",
+                e
+            )
+            settingsFile.delete()
+            save(activity, settingsData)
         }
-        return settingsData
     }
 
     private fun settingsFile(activity: Activity) =

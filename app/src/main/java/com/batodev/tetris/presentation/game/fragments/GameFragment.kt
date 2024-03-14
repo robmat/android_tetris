@@ -1,7 +1,6 @@
 package com.batodev.tetris.presentation.game.fragments
 
 import android.content.Intent
-import android.graphics.Bitmap
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
@@ -29,7 +28,6 @@ import com.batodev.tetris.presentation.game.grid.GameAdapter
 import com.batodev.tetris.presentation.game.results.GameResult
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.CoroutineStart
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
@@ -105,11 +103,11 @@ class GameFragment : Fragment(), View.OnClickListener {
     }
 
     private fun showTopSnackbar() {
-        val snackbar = Snackbar.make(view, getString(R.string.newImageInGallery), Snackbar.LENGTH_SHORT)
-        val params = snackbar.view.layoutParams as FrameLayout.LayoutParams
+        val snackBar = Snackbar.make(view, getString(R.string.newImageInGallery), Snackbar.LENGTH_SHORT)
+        val params = snackBar.view.layoutParams as FrameLayout.LayoutParams
         params.gravity = Gravity.TOP
-        snackbar.view.layoutParams = params
-        snackbar.show()
+        snackBar.view.layoutParams = params
+        snackBar.show()
     }
 
 
