@@ -3,6 +3,7 @@ package com.batodev.tetris.presentation.main
 import android.content.Intent
 import android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK
 import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
+import android.net.Uri
 import android.os.Bundle
 import android.view.Gravity
 import android.view.View
@@ -66,7 +67,7 @@ class MainActivity : HideStatusBarActivity(), View.OnClickListener {
     }
 
     private fun moreApps() {
-
+        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/dev?id=8228670503574649511")))
     }
 
     private fun startGameActivity() {
