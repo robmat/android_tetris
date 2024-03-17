@@ -1,5 +1,6 @@
 package com.batodev.tetris.presentation.main
 
+import android.content.Context
 import android.content.Intent
 import android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK
 import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
@@ -11,6 +12,7 @@ import android.widget.FrameLayout
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.batodev.tetris.R
 import com.batodev.tetris.databinding.ActivityMainBinding
+import com.batodev.tetris.infra.helpers.RateAppHelper
 import com.batodev.tetris.infra.settings.SettingsHelper
 import com.batodev.tetris.presentation.common.HideStatusBarActivity
 import com.batodev.tetris.presentation.common.getButtons
@@ -43,6 +45,7 @@ class MainActivity : HideStatusBarActivity(), View.OnClickListener {
             binding.mainMenuActivityMoreApps.id -> moreApps()
             binding.mainMenuActivitySettings.id -> settings()
             binding.mainMenuActivityUnlockedGallery.id -> gallery()
+            binding.mainMenuActivityRate.id -> rate()
             else -> throw IllegalArgumentException("Unknown button id: ${p0.id}")
         }
     }
@@ -75,5 +78,9 @@ class MainActivity : HideStatusBarActivity(), View.OnClickListener {
             addFlags(FLAG_ACTIVITY_NEW_TASK or FLAG_ACTIVITY_CLEAR_TASK)
         }
         startActivity(game)
+    }
+
+    private fun rate() {
+        RateAppHelper.showRateAppPopup(this, SettingsHelper.load(this))
     }
 }

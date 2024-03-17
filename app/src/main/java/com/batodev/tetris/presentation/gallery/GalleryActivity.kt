@@ -12,6 +12,8 @@ import android.view.Window
 import android.widget.Button
 import androidx.core.content.ContextCompat
 import com.batodev.tetris.R
+import com.batodev.tetris.infra.helpers.AdHelper
+import com.batodev.tetris.infra.helpers.RateAppHelper
 import com.batodev.tetris.infra.images.ImageHelper
 import com.batodev.tetris.infra.settings.SettingsData
 import com.batodev.tetris.infra.settings.SettingsHelper
@@ -20,13 +22,11 @@ import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import java.io.File
 import java.io.FileOutputStream
-import java.io.InputStream
 import java.io.OutputStream
 
 const val IMAGES = "images"
 
 class GalleryActivity : Activity() {
-    private lateinit var settings: SettingsData
     private var images: Array<String> = listOf<String>().toTypedArray()
     private var index: Int = 0
 
@@ -35,8 +35,7 @@ class GalleryActivity : Activity() {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE)
         setContentView(R.layout.galery_activity)
         this.images = this.intent.extras!!.getStringArray(IMAGES)!!
-        settings = SettingsHelper.load(this)
-        index = settings.lastSeenGalleryImageIndex
+        index = SettingsHelper.load(this).lastSeenGalleryImageIndex
         setImage(index)
         findViewById<AdView>(R.id.adView).loadAd(AdRequest.Builder().build())
         checkIfImageLeftRightButtonsShouldBeVisible()
@@ -49,26 +48,27 @@ class GalleryActivity : Activity() {
     fun leftClicked(view: View) {
         if (index != 0) index--
         animateTileFlip(findViewById<PhotoView>(R.id.photoView), this, true)
-        //setImageForFavBtn()
-        indexUpdate()
-        //AdHelper.showAddIfNeeded(this)
-        //RateAppHelper.increaseRateAppCounterAndShowDialogIfApplicable(this)
+        val settingsData = SettingsHelper.load(this)
+        indexUpdate(settingsData)
+        AdHelper.showAddIfNeeded(this, settingsData)
+        RateAppHelper.increaseRateAppCounterAndShowDialogIfApplicable(this, settingsData)
         checkIfImageLeftRightButtonsShouldBeVisible()
+        SettingsHelper.save(this, settingsData)
     }
 
     fun rightClicked(view: View) {
         if (index < images.size) index++
         animateTileFlip(findViewById<PhotoView>(R.id.photoView), this, false)
-        //setImageForFavBtn()
-        indexUpdate()
-        //AdHelper.showAddIfNeeded(this)
-        //RateAppHelper.increaseRateAppCounterAndShowDialogIfApplicable(this)
+        val settingsData = SettingsHelper.load(this)
+        indexUpdate(settingsData)
+        AdHelper.showAddIfNeeded(this, settingsData)
+        RateAppHelper.increaseRateAppCounterAndShowDialogIfApplicable(this, settingsData)
         checkIfImageLeftRightButtonsShouldBeVisible()
+        SettingsHelper.save(this, settingsData)
     }
 
-    private fun indexUpdate() {
-        settings.lastSeenGalleryImageIndex = index
-        SettingsHelper.save(this, settings)
+    private fun indexUpdate(settingsData: SettingsData) {
+        settingsData.lastSeenGalleryImageIndex = index
     }
 
     private fun checkIfImageLeftRightButtonsShouldBeVisible() {

@@ -1,0 +1,54 @@
+<!-- popup_rate_app.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:background="@drawable/btn_default"
+    android:orientation="vertical"
+    android:padding="60dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/rate_this_app"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:padding="8dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/we_will_stop_showing_ads"
+        android:gravity="center"
+        android:textSize="11sp"
+        android:padding="8dp"
+        android:textStyle="bold" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnRateNow"
+        android:background="@drawable/button_background"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:text="@string/rate_this_app_now" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnRateLater"
+        android:background="@drawable/button_background"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:text="@string/rate_this_app_later" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnNeverRate"
+        android:background="@drawable/button_background"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:text="@string/rate_this_app_never" />
+</LinearLayout>

@@ -2,22 +2,18 @@ package com.batodev.tetris.infra.settings
 
 import android.app.Activity
 import android.util.Log
+import com.google.gson.Gson
 import java.io.File
-import java.io.FileInputStream
-import java.io.FileOutputStream
-import java.io.ObjectInputStream
-import java.io.ObjectOutputStream
+import java.io.FileReader
+import java.io.FileWriter
 
 object SettingsHelper {
-    private var settingsData: SettingsData = SettingsData()
-
     fun load(activity: Activity): SettingsData {
         val settingsFile = settingsFile(activity)
         try {
             if (settingsFile.isFile && settingsFile.canRead()) {
-                val fis = FileInputStream(settingsFile)
-                ObjectInputStream(fis).use {
-                    settingsData = it.readObject() as SettingsData
+                FileReader(settingsFile).use {
+                    return Gson().fromJson(it, SettingsData::class.java)
                 }
             } else {
                 Log.w(SettingsHelper::class.java.simpleName, "no settings yet, returned defaults")
@@ -30,21 +26,22 @@ object SettingsHelper {
             )
             settingsFile.delete()
         }
-        return settingsData
+        return SettingsData()
     }
 
     fun save(activity: Activity, settingsData: SettingsData): SettingsData {
         val settingsFile = settingsFile(activity)
         return try {
-            val fos = FileOutputStream(settingsFile)
-            ObjectOutputStream(fos).use {
-                it.writeObject(settingsData)
+            settingsFile.delete()
+            val json = Gson().toJson(settingsData)
+            FileWriter(settingsFile).use {
+                it.write(json)
             }
             settingsData
         } catch (e: Exception) {
             Log.e(
                 SettingsHelper::class.java.simpleName,
-                "classes incompatible, will delete settings",
+                "error saving, will delete settings and retry",
                 e
             )
             settingsFile.delete()

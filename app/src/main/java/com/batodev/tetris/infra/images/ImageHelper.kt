@@ -56,7 +56,7 @@ object ImageHelper {
     ): ImageData {
         val assetImages = activity.assets.list(imagesPath)!!
         val uncoveredImages = SettingsHelper.load(activity).imagesWon
-        val imagesToPickFrom = assetImages.filter { uncoveredImages.contains(it) }
+        val imagesToPickFrom = assetImages.filter { !uncoveredImages.contains(it) }
         val imageName =
             if (imagesToPickFrom.isEmpty()) assetImages.random() else imagesToPickFrom.random()
         val originalBitmap = BitmapFactory.decodeStream(activity.assets.open("$imagesPath/$imageName"))
