@@ -12,7 +12,7 @@ import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 
-private const val AD_ID = "ca-app-pub-9667420067790140/6296207157"
+private const val AD_ID = "ca-app-pub-9667420067790140/4371571769"
 var ad: InterstitialAd? = null
 const val WHEN_TO_SHOW_ADS_DEFAULT = 2
 

@@ -38,7 +38,7 @@ class GalleryActivity : Activity() {
         this.images = this.intent.extras!!.getStringArray(IMAGES)!!
         index = SettingsHelper.load(this).lastSeenGalleryImageIndex
         setImage(index)
-        findViewById<AdView>(R.id.adView).loadAd(AdRequest.Builder().build())
+        findViewById<AdView>(R.id.gallery_ad).loadAd(AdRequest.Builder().build())
         checkIfImageLeftRightButtonsShouldBeVisible()
     }
 

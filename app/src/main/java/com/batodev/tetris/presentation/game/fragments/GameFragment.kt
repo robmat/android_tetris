@@ -31,6 +31,8 @@ import com.batodev.tetris.presentation.game.actions.ResumeToastAction
 import com.batodev.tetris.presentation.game.grid.GameAdapter
 import com.batodev.tetris.presentation.game.results.GameResult
 import com.batodev.tetris.presentation.settings.SettingsSingleton
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -71,6 +73,7 @@ class GameFragment : Fragment(), View.OnClickListener {
         setUpButtons()
         setUpResumeAction()
         setUpLogger()
+        requireView().findViewById<AdView>(R.id.game_ad).loadAd(AdRequest.Builder().build())
     }
 
     override fun onCreateView(

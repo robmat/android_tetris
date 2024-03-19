@@ -14,13 +14,13 @@
         android:orientation="vertical">
         <com.google.android.gms.ads.AdView
             xmlns:ads="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/adView"
+            android:id="@+id/gallery_ad"
             android:foregroundGravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             ads:adSize="BANNER"
-            ads:adUnitId="ca-app-pub-9667420067790140/2922926597" />
+            ads:adUnitId="ca-app-pub-9667420067790140/1818271058" />
         <com.github.chrisbanes.photoview.PhotoView
             android:id="@+id/photoView"
             android:layout_width="match_parent"
