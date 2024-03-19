@@ -44,9 +44,10 @@ import nl.dionsegijn.konfetti.xml.listeners.OnParticleSystemUpdateListener
 import java.util.Date
 import java.util.concurrent.TimeUnit
 
+const val IMAGES_WON_THIS_GAME = "IMAGES_WON_THIS_GAME"
+
 @OptIn(ExperimentalCoroutinesApi::class)
 class GameFragment : Fragment(), View.OnClickListener {
-
     private lateinit var adapter: GameAdapter
     private lateinit var model: GameViewModel
     private lateinit var resumeAction: Action
@@ -59,6 +60,7 @@ class GameFragment : Fragment(), View.OnClickListener {
     private var tierTwoImageUncovered = false
     private var tierThreeImageUncovered = false
     private lateinit var view: View
+    private val imagesWonThisGame = mutableListOf<String>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -107,48 +109,53 @@ class GameFragment : Fragment(), View.OnClickListener {
             tierOneImageUncovered = true
             addImageToUncoveredAndPickNew(2)
             showTopSnackBar()
-            val party = Party(
-                speed = 0f,
-                maxSpeed = 30f,
-                damping = 0.9f,
-                spread = 360,
-                colors = listOf(0xfce18a, 0xff726d, 0xf4306d, 0xb48def),
-                emitter = Emitter(duration = 100, TimeUnit.MILLISECONDS).max(100),
-                position = Position.Relative(0.5, 0.3)
-            )
-            val konfetti = requireView().findViewById<KonfettiView>(R.id.konfettiView)
-            konfetti.visibility = View.VISIBLE
-            konfetti.start(party)
-            konfetti.onParticleSystemUpdateListener = object : OnParticleSystemUpdateListener {
-                override fun onParticleSystemEnded(
-                    view: KonfettiView,
-                    party: Party,
-                    activeSystems: Int
-                ) {
-                    konfetti.visibility = View.GONE
-                    Log.d(GameFragment::class.java.simpleName, "confetti end: $konfetti")
-                }
-
-                override fun onParticleSystemStarted(
-                    view: KonfettiView,
-                    party: Party,
-                    activeSystems: Int
-                ) {
-                    Log.d(GameFragment::class.java.simpleName, "confetti start: $konfetti")
-                }
-
-            }
+            showConfetti()
 
         }
         if (score >= tierTwoScoreRequired && !tierTwoImageUncovered) {
             tierTwoImageUncovered = true
             addImageToUncoveredAndPickNew(3)
             showTopSnackBar()
+            showConfetti()
         }
         if (score >= tierThreeScoreRequired && !tierThreeImageUncovered) {
             tierThreeImageUncovered = true
             addImageToUncoveredAndPickNew(Integer.MAX_VALUE)
             showTopSnackBar()
+            showConfetti()
+        }
+    }
+
+    private fun showConfetti() {
+        val party = Party(
+            speed = 0f,
+            maxSpeed = 30f,
+            damping = 0.9f,
+            spread = 360,
+            colors = listOf(0xfce18a, 0xff726d, 0xf4306d, 0xb48def),
+            emitter = Emitter(duration = 100, TimeUnit.MILLISECONDS).max(100),
+            position = Position.Relative(0.5, 0.3)
+        )
+        val konfetti = requireView().findViewById<KonfettiView>(R.id.konfettiView)
+        konfetti.visibility = View.VISIBLE
+        konfetti.start(party)
+        konfetti.onParticleSystemUpdateListener = object : OnParticleSystemUpdateListener {
+            override fun onParticleSystemEnded(
+                view: KonfettiView,
+                party: Party,
+                activeSystems: Int
+            ) {
+                konfetti.visibility = View.GONE
+                Log.d(GameFragment::class.java.simpleName, "confetti end: $konfetti")
+            }
+
+            override fun onParticleSystemStarted(
+                view: KonfettiView,
+                party: Party,
+                activeSystems: Int
+            ) {
+                Log.d(GameFragment::class.java.simpleName, "confetti start: $konfetti")
+            }
         }
     }
 
@@ -173,6 +180,9 @@ class GameFragment : Fragment(), View.OnClickListener {
         if (!imagesWon.contains(imageData.fileName)) {
             imagesWon.add(imageData.fileName)
             SettingsHelper.save(requireActivity(), settingsData)
+        }
+        if (!imagesWonThisGame.contains(imageData.fileName)) {
+            imagesWonThisGame.add(imageData.fileName)
         }
         if (newImageTier == 2) {
             imageData = ImageHelper.pickTierTwoImage(requireActivity())
@@ -226,6 +236,7 @@ class GameFragment : Fragment(), View.OnClickListener {
                 GAME_RESULT,
                 GameResult(score = model.getPoints(), date = Date())
             )
+            putExtra(IMAGES_WON_THIS_GAME, imagesWonThisGame.toTypedArray())
         }
         requireContext().startActivity(finish)
         requireActivity().finish()

@@ -111,4 +111,7 @@
     <string name="rate_this_app_later">Rate this app later.</string>
     <string name="rate_this_app_never">Do not rate this app at all.</string>
     <string name="main_menu_activity_rate">Rate this app</string>
+    <string name="end_game">Game ended</string>
+    <string name="youve_won_images">Here are the images you have uncovered:</string>
+    <string name="play_again">Play again</string>
 </resources>
