@@ -17,6 +17,7 @@ import com.batodev.tetris.infra.helpers.RateAppHelper
 import com.batodev.tetris.infra.images.ImageHelper
 import com.batodev.tetris.infra.settings.SettingsData
 import com.batodev.tetris.infra.settings.SettingsHelper
+import com.batodev.tetris.presentation.main.MainActivity
 import com.github.chrisbanes.photoview.PhotoView
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
@@ -42,6 +43,10 @@ class GalleryActivity : Activity() {
     }
 
     fun backClicked(view: View) {
+        Intent(this, MainActivity::class.java).apply {
+            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+            startActivity(this)
+        }
         finish()
     }
 
@@ -98,7 +103,7 @@ class GalleryActivity : Activity() {
         val currentImageName = images[index]
         val inputStream = ImageHelper.imageStreamByName(this, currentImageName)
 
-        val tmpImgPath = "tmp_shared/tmp.png"
+        val tmpImgPath = "tmp_shared/tmp.jpg"
         val file = File(filesDir, tmpImgPath)
         File(filesDir, "tmp_shared").mkdirs()
         file.delete()
@@ -129,9 +134,7 @@ class GalleryActivity : Activity() {
             AnimatorInflater.loadAnimator(this, imgFlipA) as AnimatorSet
         rotateFlipAnimationA.setTarget(tileView)
         rotateFlipAnimationA.addListener(object : Animator.AnimatorListener {
-            override fun onAnimationStart(p0: Animator) {
-            }
-
+            override fun onAnimationStart(p0: Animator) {}
             override fun onAnimationEnd(p0: Animator) {
                 val rotateFlipAnimationB = AnimatorInflater.loadAnimator(
                     gameActivity,
@@ -139,10 +142,7 @@ class GalleryActivity : Activity() {
                 ) as AnimatorSet
                 rotateFlipAnimationB.setTarget(tileView)
                 rotateFlipAnimationB.addListener(object : Animator.AnimatorListener {
-                    override fun onAnimationEnd(p0: Animator) {
-
-                    }
-
+                    override fun onAnimationEnd(p0: Animator) {}
                     override fun onAnimationStart(p0: Animator) {}
                     override fun onAnimationCancel(p0: Animator) {}
                     override fun onAnimationRepeat(p0: Animator) {}
@@ -150,7 +150,6 @@ class GalleryActivity : Activity() {
                 setImage(index)
                 rotateFlipAnimationB.start()
             }
-
             override fun onAnimationCancel(p0: Animator) {}
             override fun onAnimationRepeat(p0: Animator) {}
         })
