@@ -92,13 +92,14 @@ class GameFragment : Fragment(), View.OnClickListener {
 
 
     private fun setUpViewModel() {
+        val settingsData = SettingsSingleton.getSettingsData(requireContext())
         model = ViewModelProvider(requireActivity())[GameViewModel::class.java]
         model.setUp(
             SettingsSingleton.getFacade(requireContext()),
             SettingsSingleton.getSpeedStrategy(requireContext())
         )
         model.setUpMusic(
-            SettingsSingleton.getSettingsData(requireContext()).hasMusic,
+            settingsData.hasMusic,
             requireContext()
         )
         model.setUpImage(imageData.fileName)
@@ -110,10 +111,14 @@ class GameFragment : Fragment(), View.OnClickListener {
             } else {
                 finishGame()
             }
-            tickPlayer.start()
+            if (settingsData.hasSounds) {
+                tickPlayer.start()
+            }
             if (it.getScore().value > lastScore) {
                 lastScore = it.getScore().value
-                pointPlayer.start()
+                if (settingsData.hasSounds) {
+                    pointPlayer.start()
+                }
             }
         }
     }
@@ -142,7 +147,10 @@ class GameFragment : Fragment(), View.OnClickListener {
     }
 
     private fun showConfettiAndPlaySound() {
-        imagePlayer.start()
+        val settingsData = SettingsSingleton.getSettingsData(requireContext())
+        if (settingsData.hasSounds) {
+            imagePlayer.start()
+        }
         val party = Party(
             speed = 0f,
             maxSpeed = 30f,
