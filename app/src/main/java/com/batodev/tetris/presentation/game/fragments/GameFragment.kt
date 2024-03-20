@@ -1,6 +1,7 @@
 package com.batodev.tetris.presentation.game.fragments
 
 import android.content.Intent
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
@@ -50,6 +51,9 @@ const val IMAGES_WON_THIS_GAME = "IMAGES_WON_THIS_GAME"
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class GameFragment : Fragment(), View.OnClickListener {
+    private lateinit var tickPlayer: MediaPlayer
+    private lateinit var pointPlayer: MediaPlayer
+    private lateinit var imagePlayer: MediaPlayer
     private lateinit var adapter: GameAdapter
     private lateinit var model: GameViewModel
     private lateinit var resumeAction: Action
@@ -74,6 +78,9 @@ class GameFragment : Fragment(), View.OnClickListener {
         setUpResumeAction()
         setUpLogger()
         requireView().findViewById<AdView>(R.id.game_ad).loadAd(AdRequest.Builder().build())
+        tickPlayer = MediaPlayer.create(requireContext(), R.raw.tick)
+        imagePlayer = MediaPlayer.create(requireContext(), R.raw.image_uncovered)
+        pointPlayer = MediaPlayer.create(requireContext(), R.raw.points_scored)
     }
 
     override fun onCreateView(
@@ -95,12 +102,18 @@ class GameFragment : Fragment(), View.OnClickListener {
             requireContext()
         )
         model.setUpImage(imageData.fileName)
+        var lastScore = 0
         model.gameFacade.observe(viewLifecycleOwner) {
             if (!it.hasFinished()) {
                 updateScreen()
                 checkIfImageIsWon()
             } else {
                 finishGame()
+            }
+            tickPlayer.start()
+            if (it.getScore().value > lastScore) {
+                lastScore = it.getScore().value
+                pointPlayer.start()
             }
         }
     }
@@ -112,24 +125,24 @@ class GameFragment : Fragment(), View.OnClickListener {
             tierOneImageUncovered = true
             addImageToUncoveredAndPickNew(2)
             showTopSnackBar()
-            showConfetti()
-
+            showConfettiAndPlaySound()
         }
         if (score >= tierTwoScoreRequired && !tierTwoImageUncovered) {
             tierTwoImageUncovered = true
             addImageToUncoveredAndPickNew(3)
             showTopSnackBar()
-            showConfetti()
+            showConfettiAndPlaySound()
         }
         if (score >= tierThreeScoreRequired && !tierThreeImageUncovered) {
             tierThreeImageUncovered = true
             addImageToUncoveredAndPickNew(Integer.MAX_VALUE)
             showTopSnackBar()
-            showConfetti()
+            showConfettiAndPlaySound()
         }
     }
 
-    private fun showConfetti() {
+    private fun showConfettiAndPlaySound() {
+        imagePlayer.start()
         val party = Party(
             speed = 0f,
             maxSpeed = 30f,
