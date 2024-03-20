@@ -23,7 +23,7 @@ object SettingsSingleton : Serializable {
         val name = preferences.getString(context.getString(R.string.key_name), context.getString(R.string.name_default))
         val isGhost = preferences.getBoolean(context.getString(R.string.key_ghost), true)
         val hasMusic = preferences.getBoolean(context.getString(R.string.key_music), true)
-        val hasSounds = preferences.getBoolean(context.getString(R.string.key_music), true)
+        val hasSounds = preferences.getBoolean(context.getString(R.string.key_sounds), true)
         val difficultyString = preferences.getString(context.getString(R.string.key_difficulty), context.getString(R.string.medium_key))
         val themeString = preferences.getString(context.getString(R.string.key_theme), context.getString(R.string.neon_key))
         val level = Level.valueOf(difficultyString!!)
