@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
-  <string name="app_name">Tetris</string>
+
   <string name="help_button">Ayuda</string>
   <string name="start_button">Comenzar</string>
   <string name="quit_button">Abandonar</string>

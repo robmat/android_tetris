@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
-  <string name="app_name">टेट्रिस</string>
+
   <string name="help_button">मदद</string>
   <string name="start_button">शुरू</string>
   <string name="quit_button">छोड़ना</string>

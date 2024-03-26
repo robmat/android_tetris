@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
-  <string name="app_name">俄罗斯方块</string>
+
   <string name="help_button">帮助</string>
   <string name="start_button">开始</string>
   <string name="quit_button">辞职</string>

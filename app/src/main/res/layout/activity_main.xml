@@ -36,7 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="serif-monospace"
-            android:layout_marginTop="320dp"
+            android:layout_marginTop="200dp"
             android:background="@drawable/button_background"
             android:soundEffectsEnabled="true"
             android:text="@string/main_menu_activity_play_the_game"

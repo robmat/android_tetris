@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
-  <string name="app_name">テトリス</string>
+
   <string name="help_button">ヘルプ</string>
   <string name="start_button">始める</string>
   <string name="quit_button">やめる</string>

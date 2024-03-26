@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
-  <string name="app_name">টেট্রিস</string>
+
   <string name="help_button">সাহায্য</string>
   <string name="start_button">শুরু করুন</string>
   <string name="quit_button">প্রস্থান করুন</string>
