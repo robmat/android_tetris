@@ -119,6 +119,8 @@ class GalleryActivity : Activity() {
         val uri =
             Uri.parse("content://com.batodev.beautifulasiangirlpics.ImagesProvider/$tmpImgPath")
         shareIntent.putExtra(Intent.EXTRA_STREAM, uri)
+        shareIntent.clipData = android.content.ClipData.newRawUri("", uri)
+        shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
         shareIntent.type = "image/*"
         ContextCompat.startActivity(this, shareIntent, null)
     }
