@@ -17,14 +17,14 @@ def versionProps = new Properties()
 file("version.properties").withInputStream { versionProps.load(it) }
 
 android {
-    compileSdk 37
+    compileSdk = 37
 
     defaultConfig {
-        applicationId "com.batodev.tetris"
-        minSdk 23
-        targetSdk 37
-        versionCode versionProps.getProperty("versionCode").toInteger()
-        versionName versionProps.getProperty("versionName")
+        applicationId = "com.batodev.tetris"
+        minSdk = 23
+        targetSdk = 37
+        versionCode = versionProps.getProperty("versionCode").toInteger()
+        versionName = versionProps.getProperty("versionName")
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
