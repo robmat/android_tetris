@@ -3,6 +3,7 @@ package com.batodev.tetris.presentation.common
 import android.os.Build
 import android.os.Bundle
 import android.view.View
+import androidx.activity.addCallback
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
@@ -16,6 +17,15 @@ open class HideStatusBarActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         hideStatusBar()
         super.onCreate(savedInstanceState)
+        onBackPressedDispatcher.addCallback(this) {
+            AlertDialog.Builder(this@HideStatusBarActivity)
+                .setTitle(R.string.warning)
+                .setMessage(R.string.quitAppMessage)
+                .setNegativeButton(R.string.cancel) { _, _ -> hideStatusBar() }
+                .setPositiveButton(R.string.ok) { _, _ -> finishAffinity();exitProcess(0) }
+                .create()
+                .show()
+        }
     }
 
     private fun hideStatusBar() {
@@ -29,17 +39,6 @@ open class HideStatusBarActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         hideStatusBar()
-    }
-
-    override fun onBackPressed() {
-        super.onBackPressed()
-        AlertDialog.Builder(this)
-            .setTitle(R.string.warning)
-            .setMessage(R.string.quitAppMessage)
-            .setNegativeButton(R.string.cancel) { _, _ -> hideStatusBar() }
-            .setPositiveButton(R.string.ok) { _, _ -> finishAffinity();exitProcess(0) }
-            .create()
-            .show()
     }
 
     private fun hideNavBar() {
