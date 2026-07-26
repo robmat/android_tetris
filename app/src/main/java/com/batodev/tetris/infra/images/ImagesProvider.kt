@@ -1,4 +1,4 @@
-package com.batodev.tetris.infra.images;
+package com.batodev.tetris.infra.images
 
 import androidx.core.content.FileProvider
 import com.batodev.tetris.R

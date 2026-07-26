@@ -3,9 +3,9 @@ package com.batodev.tetris.presentation.game.grid.block
 import block_factory.BlockType
 import com.batodev.tetris.R
 
-class NeonBlock: BlockPainter {
+class NeonBlock : BlockPainter {
 
-    override fun getImageId(block: BlockType) = when(block) {
+    override fun getImageId(block: BlockType) = when (block) {
         BlockType.I_BLOCK -> R.drawable.iblockneon
         BlockType.S_BLOCK -> R.drawable.sblockneon
         BlockType.Z_BLOCK -> R.drawable.zblockneon
@@ -14,5 +14,4 @@ class NeonBlock: BlockPainter {
         BlockType.SQUARE_BLOCK -> R.drawable.squareblockneon
         BlockType.T_BLOCK -> R.drawable.tblockneon
     }
-
 }

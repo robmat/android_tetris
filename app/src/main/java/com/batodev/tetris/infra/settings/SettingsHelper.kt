@@ -3,9 +3,11 @@ package com.batodev.tetris.infra.settings
 import android.app.Activity
 import android.util.Log
 import com.google.gson.Gson
+import com.google.gson.JsonParseException
 import java.io.File
 import java.io.FileReader
 import java.io.FileWriter
+import java.io.IOException
 
 object SettingsHelper {
     fun load(activity: Activity): SettingsData {
@@ -18,7 +20,14 @@ object SettingsHelper {
             } else {
                 Log.w(SettingsHelper::class.java.simpleName, "no settings yet, returned defaults")
             }
-        } catch (e: Exception) {
+        } catch (e: IOException) {
+            Log.e(
+                SettingsHelper::class.java.simpleName,
+                "classes incompatible, will delete settings",
+                e
+            )
+            settingsFile.delete()
+        } catch (e: JsonParseException) {
             Log.e(
                 SettingsHelper::class.java.simpleName,
                 "classes incompatible, will delete settings",
@@ -38,7 +47,7 @@ object SettingsHelper {
                 it.write(json)
             }
             settingsData
-        } catch (e: Exception) {
+        } catch (e: IOException) {
             Log.e(
                 SettingsHelper::class.java.simpleName,
                 "error saving, will delete settings and retry",

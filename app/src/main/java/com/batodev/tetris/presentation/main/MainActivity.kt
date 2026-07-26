@@ -1,6 +1,5 @@
 package com.batodev.tetris.presentation.main
 
-import android.content.Context
 import android.content.Intent
 import android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK
 import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
@@ -61,7 +60,11 @@ class MainActivity : HideStatusBarActivity(), View.OnClickListener {
             intent.putExtra(IMAGES, imagesWon.toTypedArray())
             startActivity(intent)
         } else {
-            val snackBar = Snackbar.make(binding.root, getString(R.string.playTheGameTounlockImages), Snackbar.LENGTH_SHORT)
+            val snackBar = Snackbar.make(
+                binding.root,
+                getString(R.string.playTheGameTounlockImages),
+                Snackbar.LENGTH_SHORT
+            )
             val params = snackBar.view.layoutParams as FrameLayout.LayoutParams
             params.gravity = Gravity.TOP
             snackBar.view.layoutParams = params
@@ -70,7 +73,9 @@ class MainActivity : HideStatusBarActivity(), View.OnClickListener {
     }
 
     private fun moreApps() {
-        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/dev?id=8228670503574649511")))
+        startActivity(
+            Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/dev?id=8228670503574649511"))
+        )
     }
 
     private fun startGameActivity() {

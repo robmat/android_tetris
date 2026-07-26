@@ -9,29 +9,22 @@ import android.graphics.PorterDuff
 import android.graphics.PorterDuffXfermode
 import android.graphics.Rect
 import android.graphics.RectF
-
 import com.batodev.tetris.infra.settings.SettingsHelper
 import java.io.InputStream
-import java.lang.Exception
 import java.math.BigDecimal
 import java.math.RoundingMode
 
 object ImageHelper {
+    private const val ROUNDED_CORNER_RADIUS_PX = 25
+    private const val ASPECT_RATIO_WIDTH = 275
+    private const val ASPECT_RATIO_HEIGHT = 550
+    private const val ASPECT_RATIO_SCALE = 5
 
     fun imageStreamByName(activity: Activity, name: String): InputStream {
-        val tierOneImages = activity.assets.list("pics/tier1")
-        if (tierOneImages!!.contains(name)) {
-            return activity.assets.open("pics/tier1/$name")
-        }
-        val tierTwoImages = activity.assets.list("pics/tier2")
-        if (tierTwoImages!!.contains(name)) {
-            return activity.assets.open("pics/tier2/$name")
-        }
-        val tierThreeImages = activity.assets.list("pics/tier3")
-        if (tierThreeImages!!.contains(name)) {
-            return activity.assets.open("pics/tier3/$name")
-        }
-        throw Exception("no image by name: $name")
+        val tier = listOf("pics/tier1", "pics/tier2", "pics/tier3")
+            .firstOrNull { activity.assets.list(it)!!.contains(name) }
+            ?: throw NoSuchElementException("no image by name: $name")
+        return activity.assets.open("$tier/$name")
     }
 
     fun imageBitmapByName(activity: Activity, name: String): Bitmap {
@@ -61,12 +54,13 @@ object ImageHelper {
             if (imagesToPickFrom.isEmpty()) assetImages.random() else imagesToPickFrom.random()
         val originalBitmap = BitmapFactory.decodeStream(activity.assets.open("$imagesPath/$imageName"))
         val croppedBitmap = cropToAspectRatio(originalBitmap)
-        val roundCornersBitmap = getRoundedCornerBitmap(croppedBitmap, 25)
+        val roundCornersBitmap = getRoundedCornerBitmap(croppedBitmap, ROUNDED_CORNER_RADIUS_PX)
         return ImageData(roundCornersBitmap, imageName)
     }
 
     private fun cropToAspectRatio(bitmap: Bitmap): Bitmap {
-        val aspectRatio: BigDecimal = BigDecimal(275).divide(BigDecimal(550), 5, RoundingMode.HALF_UP)
+        val aspectRatio: BigDecimal = BigDecimal(ASPECT_RATIO_WIDTH)
+            .divide(BigDecimal(ASPECT_RATIO_HEIGHT), ASPECT_RATIO_SCALE, RoundingMode.HALF_UP)
         val width = BigDecimal(bitmap.width)
         val height = BigDecimal(bitmap.height)
 
@@ -95,8 +89,10 @@ object ImageHelper {
 
     fun getRoundedCornerBitmap(bitmap: Bitmap, pixels: Int): Bitmap {
         val output = Bitmap.createBitmap(
-            bitmap.width, bitmap
-                .height, Bitmap.Config.ARGB_8888
+            bitmap.width,
+            bitmap
+                .height,
+            Bitmap.Config.ARGB_8888
         )
         val canvas = Canvas(output)
         val color = -0xbdbdbe

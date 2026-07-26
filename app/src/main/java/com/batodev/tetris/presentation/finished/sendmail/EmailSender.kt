@@ -10,7 +10,7 @@ import com.batodev.tetris.R
 class EmailSender(private val activity: Activity, private val emailData: EmailData) {
 
     @SuppressLint("QueryPermissionsNeeded")
-        fun send() {
+    fun send() {
         val intent = Intent(Intent.ACTION_SEND).apply {
             data = Uri.parse("mailto:")
             type = "text/plain"

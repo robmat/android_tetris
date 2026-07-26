@@ -12,12 +12,19 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.root_preferences, rootKey)
-        val editTextName: EditTextPreference = preferenceScreen.findPreference<Preference>(getString(R.string.key_name)) as EditTextPreference
+        val editTextName: EditTextPreference = preferenceScreen.findPreference<Preference>(
+            getString(R.string.key_name)
+        ) as EditTextPreference
         editTextName.setOnPreferenceChangeListener { _, newValue ->
             val name = newValue as String
             val result = ValidateName(name).execute()
-            if (!result.success)
-                Toast.makeText(requireContext(), result.errorMessage!!.asString(requireContext()), Toast.LENGTH_SHORT).show()
+            if (!result.success) {
+                Toast.makeText(
+                    requireContext(),
+                    result.errorMessage!!.asString(requireContext()),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
             result.success
         }
     }

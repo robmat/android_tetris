@@ -16,6 +16,8 @@ import com.batodev.tetris.presentation.game.grid.style.StyleFactory
 import java.io.Serializable
 
 object SettingsSingleton : Serializable {
+    private const val serialVersionUID = 1L
+
     private fun readResolve(): Any = SettingsSingleton
 
     fun getSettingsData(context: Context): SettingsData {
@@ -24,8 +26,14 @@ object SettingsSingleton : Serializable {
         val isGhost = preferences.getBoolean(context.getString(R.string.key_ghost), true)
         val hasMusic = preferences.getBoolean(context.getString(R.string.key_music), true)
         val hasSounds = preferences.getBoolean(context.getString(R.string.key_sounds), true)
-        val difficultyString = preferences.getString(context.getString(R.string.key_difficulty), context.getString(R.string.medium_key))
-        val themeString = preferences.getString(context.getString(R.string.key_theme), context.getString(R.string.neon_key))
+        val difficultyString = preferences.getString(
+            context.getString(R.string.key_difficulty),
+            context.getString(R.string.medium_key)
+        )
+        val themeString = preferences.getString(
+            context.getString(R.string.key_theme),
+            context.getString(R.string.neon_key)
+        )
         val level = Level.valueOf(difficultyString!!)
         val theme = Style.valueOf(themeString!!)
         return SettingsData(
@@ -73,5 +81,4 @@ object SettingsSingleton : Serializable {
                 UiText.ResourceString(R.string.theme_log, settings.style.name)
             )
     }
-
 }

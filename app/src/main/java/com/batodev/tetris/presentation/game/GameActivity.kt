@@ -4,8 +4,6 @@ import android.os.Bundle
 import com.batodev.tetris.R
 import com.batodev.tetris.infra.settings.SettingsHelper
 import com.batodev.tetris.presentation.common.HideStatusBarActivity
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.AdView
 
 class GameActivity : HideStatusBarActivity() {
 

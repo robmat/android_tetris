@@ -11,18 +11,24 @@ import game.GameCell
 
 class VibrantColorChooser(private val context: Context) : ColorCellChooser {
 
+    companion object {
+        private const val GRID_ROWS = 20
+        private const val GRID_COLUMNS = 10
+    }
+
     override fun paint(gameCell: GameCell, p1: View?, p2: ViewGroup?): View {
         val view = p1 ?: View.inflate(context, R.layout.grid_item, null)
         val cell: TextView = view.findViewById(R.id.grid_item)
         cell.background = AppCompatResources.getDrawable(context, this.getColorForCell(gameCell))
-        cell.height = p2!!.height / 20
-        cell.width = p2.width / 10
+        cell.height = p2!!.height / GRID_ROWS
+        cell.width = p2.width / GRID_COLUMNS
         return view
     }
 
     private fun getColorForCell(cell: GameCell): Int {
-        if (cell.isGhostBlockCell)
+        if (cell.isGhostBlockCell) {
             return R.color.vibrant_gray
+        }
         return when (cell.cell) {
             Cell.EMPTY -> R.color.black
             Cell.I_BLOCK -> R.color.vibrant_yellow
@@ -34,5 +40,4 @@ class VibrantColorChooser(private val context: Context) : ColorCellChooser {
             Cell.Z_BLOCK -> R.color.vibrant_purple
         }
     }
-
 }

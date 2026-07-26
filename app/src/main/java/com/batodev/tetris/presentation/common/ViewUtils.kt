@@ -13,10 +13,11 @@ fun ViewGroup.getButtons(): List<Button> =
 internal fun getButtonsRecursive(viewGroup: ViewGroup, strategy: (Any) -> Boolean): List<Any> {
     val result = ArrayList<Any>()
     for (view in viewGroup.children) {
-        if (view is ViewGroup)
+        if (view is ViewGroup) {
             result.addAll(getButtonsRecursive(view, strategy))
-        else if (strategy(view))
+        } else if (strategy(view)) {
             result.add(view)
+        }
     }
     return result
 }

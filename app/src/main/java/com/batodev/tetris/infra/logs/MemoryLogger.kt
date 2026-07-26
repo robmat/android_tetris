@@ -25,13 +25,15 @@ object MemoryLogger : Logger {
 
     override fun getLog(): List<UiText> {
         val result = messages.toMutableList()
-        result.addAll(movements.map {
-            UiText.ResourceString(
-                R.string.result_movements_log,
-                it.key,
-                it.value
-            )
-        })
+        result.addAll(
+            movements.map {
+                UiText.ResourceString(
+                    R.string.result_movements_log,
+                    it.key,
+                    it.value
+                )
+            }
+        )
         return result
     }
 
@@ -39,5 +41,4 @@ object MemoryLogger : Logger {
         messages.clear()
         movements.clear()
     }
-
 }

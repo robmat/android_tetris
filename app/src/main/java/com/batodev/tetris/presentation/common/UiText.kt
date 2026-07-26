@@ -16,5 +16,4 @@ sealed class UiText {
             }
         }
     }
-
 }

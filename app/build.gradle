@@ -5,6 +5,7 @@ plugins {
     id 'com.batodev.releasetools'
     id 'com.github.ben-manes.versions'
     id 'se.patrikerdes.use-latest-versions'
+    id 'io.gitlab.arturbosch.detekt'
 }
 
 def keystorePropertiesFile = rootProject.file("../keystore.properties")
@@ -66,7 +67,14 @@ play {
     defaultToAppBundles.set(true)
 }
 
+detekt {
+    buildUponDefaultConfig = true
+    config.setFrom(files("$projectDir/config/detekt/detekt.yml"))
+}
+
 dependencies {
+    detektPlugins 'io.gitlab.arturbosch.detekt:detekt-formatting:1.23.8'
+
     implementation 'androidx.core:core-ktx:1.19.0'
     implementation 'androidx.appcompat:appcompat:1.7.1'
     implementation 'com.google.android.material:material:1.14.0'

@@ -9,5 +9,4 @@ object SpeedFactory {
         Level.MEDIUM -> MediumSpeed()
         Level.HIGH -> HighSpeed()
     }
-
 }

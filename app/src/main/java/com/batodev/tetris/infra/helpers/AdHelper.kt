@@ -1,12 +1,9 @@
 package com.batodev.tetris.infra.helpers
 
 import android.app.Activity
-import android.content.Context
 import android.util.Log
-import androidx.core.content.edit
 import com.batodev.tetris.infra.settings.SettingsData
 import com.batodev.tetris.infra.settings.SettingsHelper
-
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.interstitial.InterstitialAd
@@ -43,7 +40,10 @@ object AdHelper {
     fun loadAd(activity: Activity) {
         val adRequest: AdRequest = AdRequest.Builder().build()
 
-        InterstitialAd.load(activity, AD_ID, adRequest,
+        InterstitialAd.load(
+            activity,
+            AD_ID,
+            adRequest,
             object : InterstitialAdLoadCallback() {
                 override fun onAdLoaded(interstitialAd: InterstitialAd) {
                     // The mInterstitialAd reference will be null until
@@ -56,6 +56,7 @@ object AdHelper {
                     // Handle the error
                     Log.w(AdHelper::class.simpleName, "onAdFailedToLoad: $loadAdError")
                 }
-            })
+            }
+        )
     }
 }

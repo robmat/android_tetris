@@ -51,6 +51,25 @@ const val IMAGES_WON_THIS_GAME = "IMAGES_WON_THIS_GAME"
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class GameFragment : Fragment(), View.OnClickListener {
+    companion object {
+        private const val TIER_ONE_SCORE_REQUIRED = 200
+        private const val TIER_TWO_SCORE_REQUIRED = 450
+        private const val TIER_THREE_SCORE_REQUIRED = 700
+        private const val IMAGE_TIER_TWO = 2
+        private const val IMAGE_TIER_THREE = 3
+        private const val CONFETTI_MAX_SPEED = 30f
+        private const val CONFETTI_DAMPING = 0.9f
+        private const val CONFETTI_SPREAD_DEGREES = 360
+        private const val CONFETTI_COLOR_1 = 0xfce18a
+        private const val CONFETTI_COLOR_2 = 0xff726d
+        private const val CONFETTI_COLOR_3 = 0xf4306d
+        private const val CONFETTI_COLOR_4 = 0xb48def
+        private const val CONFETTI_EMITTER_DURATION_MS = 100L
+        private const val CONFETTI_EMITTER_MAX_PARTICLES = 100
+        private const val CONFETTI_POSITION_X = 0.5
+        private const val CONFETTI_POSITION_Y = 0.3
+    }
+
     private lateinit var tickPlayer: MediaPlayer
     private lateinit var pointPlayer: MediaPlayer
     private lateinit var imagePlayer: MediaPlayer
@@ -59,9 +78,9 @@ class GameFragment : Fragment(), View.OnClickListener {
     private lateinit var resumeAction: Action
     private lateinit var moveBlockDown: Job
     private lateinit var imageData: ImageData
-    private val tierOneScoreRequired = 200 // 200
-    private val tierTwoScoreRequired = 450 // 450
-    private val tierThreeScoreRequired = 700 // 700
+    private val tierOneScoreRequired = TIER_ONE_SCORE_REQUIRED
+    private val tierTwoScoreRequired = TIER_TWO_SCORE_REQUIRED
+    private val tierThreeScoreRequired = TIER_THREE_SCORE_REQUIRED
     private var tierOneImageUncovered = false
     private var tierTwoImageUncovered = false
     private var tierThreeImageUncovered = false
@@ -84,12 +103,12 @@ class GameFragment : Fragment(), View.OnClickListener {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_game, container, false)
     }
-
 
     private fun setUpViewModel() {
         val settingsData = SettingsSingleton.getSettingsData(requireContext())
@@ -128,13 +147,13 @@ class GameFragment : Fragment(), View.OnClickListener {
         Log.d(GameFragment::class.java.simpleName, "Score: $score")
         if (score >= tierOneScoreRequired && !tierOneImageUncovered) {
             tierOneImageUncovered = true
-            addImageToUncoveredAndPickNew(2)
+            addImageToUncoveredAndPickNew(IMAGE_TIER_TWO)
             showTopSnackBar()
             showConfettiAndPlaySound()
         }
         if (score >= tierTwoScoreRequired && !tierTwoImageUncovered) {
             tierTwoImageUncovered = true
-            addImageToUncoveredAndPickNew(3)
+            addImageToUncoveredAndPickNew(IMAGE_TIER_THREE)
             showTopSnackBar()
             showConfettiAndPlaySound()
         }
@@ -153,12 +172,13 @@ class GameFragment : Fragment(), View.OnClickListener {
         }
         val party = Party(
             speed = 0f,
-            maxSpeed = 30f,
-            damping = 0.9f,
-            spread = 360,
-            colors = listOf(0xfce18a, 0xff726d, 0xf4306d, 0xb48def),
-            emitter = Emitter(duration = 100, TimeUnit.MILLISECONDS).max(100),
-            position = Position.Relative(0.5, 0.3)
+            maxSpeed = CONFETTI_MAX_SPEED,
+            damping = CONFETTI_DAMPING,
+            spread = CONFETTI_SPREAD_DEGREES,
+            colors = listOf(CONFETTI_COLOR_1, CONFETTI_COLOR_2, CONFETTI_COLOR_3, CONFETTI_COLOR_4),
+            emitter = Emitter(duration = CONFETTI_EMITTER_DURATION_MS, TimeUnit.MILLISECONDS)
+                .max(CONFETTI_EMITTER_MAX_PARTICLES),
+            position = Position.Relative(CONFETTI_POSITION_X, CONFETTI_POSITION_Y)
         )
         val konfetti = requireView().findViewById<KonfettiView>(R.id.konfettiView)
         konfetti.visibility = View.VISIBLE
@@ -192,7 +212,6 @@ class GameFragment : Fragment(), View.OnClickListener {
         snackBar.show()
     }
 
-
     private fun addImageToUncoveredAndPickNew(newImageTier: Int) {
         Log.d(GameFragment::class.java.simpleName, "image won newImageTier: $newImageTier")
         Log.d(
@@ -208,10 +227,10 @@ class GameFragment : Fragment(), View.OnClickListener {
         if (!imagesWonThisGame.contains(imageData.fileName)) {
             imagesWonThisGame.add(imageData.fileName)
         }
-        if (newImageTier == 2) {
+        if (newImageTier == IMAGE_TIER_TWO) {
             imageData = ImageHelper.pickTierTwoImage(requireActivity())
         }
-        if (newImageTier == 3) {
+        if (newImageTier == IMAGE_TIER_THREE) {
             imageData = ImageHelper.pickTierThreeImage(requireActivity())
         }
         requireView().findViewById<ImageView>(R.id.GameImage).setImageBitmap(imageData.bitmap)
@@ -226,15 +245,19 @@ class GameFragment : Fragment(), View.OnClickListener {
     }
 
     private fun setUpLogger() {
-        if (!model.isGameStarted())
+        if (!model.isGameStarted()) {
             SettingsSingleton.logData(requireContext())
+        }
     }
 
     private fun setUpButtons() {
         (requireView() as ViewGroup).getButtons().forEach { it.setOnClickListener(this) }
         requireView().findViewById<PlayPauseView>(R.id.pauseButton).setOnClickListener(this)
         requireView().findViewById<Button>(R.id.DownButton)
-            .setOnLongClickListener { model.dropBlock();true }
+            .setOnLongClickListener {
+                model.dropBlock()
+                true
+            }
     }
 
     private fun updateScreen() {
@@ -313,8 +336,9 @@ class GameFragment : Fragment(), View.OnClickListener {
         if (model.isGamePaused()) {
             resumeAction.execute()
             resumeGame()
-        } else
+        } else {
             pauseGame()
+        }
     }
 
     private fun resumeGame() {
@@ -323,5 +347,4 @@ class GameFragment : Fragment(), View.OnClickListener {
             model.setGameResume()
         }
     }
-
 }

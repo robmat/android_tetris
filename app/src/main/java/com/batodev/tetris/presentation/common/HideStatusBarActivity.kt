@@ -22,7 +22,10 @@ open class HideStatusBarActivity : AppCompatActivity() {
                 .setTitle(R.string.warning)
                 .setMessage(R.string.quitAppMessage)
                 .setNegativeButton(R.string.cancel) { _, _ -> hideStatusBar() }
-                .setPositiveButton(R.string.ok) { _, _ -> finishAffinity();exitProcess(0) }
+                .setPositiveButton(R.string.ok) { _, _ ->
+                    finishAffinity()
+                    exitProcess(0)
+                }
                 .create()
                 .show()
         }
@@ -30,10 +33,11 @@ open class HideStatusBarActivity : AppCompatActivity() {
 
     private fun hideStatusBar() {
         hideNavBar()
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             window.setDecorFitsSystemWindows(false)
-        else
+        } else {
             olderCompatibilityHiding()
+        }
     }
 
     override fun onResume() {
@@ -55,14 +59,15 @@ open class HideStatusBarActivity : AppCompatActivity() {
         decorView.systemUiVisibility
         decorView.setOnSystemUiVisibilityChangeListener { visibility ->
             if (visibility and View.SYSTEM_UI_FLAG_FULLSCREEN == 0) {
-                decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                decorView.systemUiVisibility = (
+                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                         or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                         or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                         or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                         or View.SYSTEM_UI_FLAG_FULLSCREEN
-                        or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
+                        or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                    )
             }
         }
     }
-
 }

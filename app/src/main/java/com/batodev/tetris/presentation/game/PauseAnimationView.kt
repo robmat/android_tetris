@@ -60,5 +60,4 @@ class PlayPauseView : AppCompatImageView {
         startAnimation(fadeInAnimation)
         fadeInAnimation.fillAfter = true
     }
-
 }

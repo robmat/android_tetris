@@ -2,6 +2,7 @@ package com.batodev.tetris.presentation.gallery
 
 import android.animation.Animator
 import android.animation.AnimatorInflater
+import android.animation.AnimatorListenerAdapter
 import android.animation.AnimatorSet
 import android.app.Activity
 import android.content.Intent
@@ -28,6 +29,10 @@ import java.io.OutputStream
 const val IMAGES = "images"
 
 class GalleryActivity : Activity() {
+    companion object {
+        private const val COPY_BUFFER_SIZE = 1024
+    }
+
     private var images: Array<String> = listOf<String>().toTypedArray()
     private var index: Int = 0
 
@@ -108,7 +113,7 @@ class GalleryActivity : Activity() {
         File(filesDir, "tmp_shared").mkdirs()
         file.delete()
         val outputStream: OutputStream = FileOutputStream(file)
-        val buffer = ByteArray(1024)
+        val buffer = ByteArray(COPY_BUFFER_SIZE)
         var bytesRead: Int
         while (inputStream.read(buffer).also { bytesRead = it } != -1) {
             outputStream.write(buffer, 0, bytesRead)
@@ -117,7 +122,7 @@ class GalleryActivity : Activity() {
         outputStream.close()
         val shareIntent = Intent(Intent.ACTION_SEND)
         val uri =
-            Uri.parse("content://com.batodev.beautifulasiangirlpics.ImagesProvider/$tmpImgPath")
+            Uri.parse("content://com.batodev.tetris.ImagesProvider/$tmpImgPath")
         shareIntent.putExtra(Intent.EXTRA_STREAM, uri)
         shareIntent.clipData = android.content.ClipData.newRawUri("", uri)
         shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
@@ -135,25 +140,16 @@ class GalleryActivity : Activity() {
         val rotateFlipAnimationA =
             AnimatorInflater.loadAnimator(this, imgFlipA) as AnimatorSet
         rotateFlipAnimationA.setTarget(tileView)
-        rotateFlipAnimationA.addListener(object : Animator.AnimatorListener {
-            override fun onAnimationStart(p0: Animator) {}
-            override fun onAnimationEnd(p0: Animator) {
+        rotateFlipAnimationA.addListener(object : AnimatorListenerAdapter() {
+            override fun onAnimationEnd(animation: Animator) {
                 val rotateFlipAnimationB = AnimatorInflater.loadAnimator(
                     gameActivity,
                     imgFlipB
                 ) as AnimatorSet
                 rotateFlipAnimationB.setTarget(tileView)
-                rotateFlipAnimationB.addListener(object : Animator.AnimatorListener {
-                    override fun onAnimationEnd(p0: Animator) {}
-                    override fun onAnimationStart(p0: Animator) {}
-                    override fun onAnimationCancel(p0: Animator) {}
-                    override fun onAnimationRepeat(p0: Animator) {}
-                })
                 setImage(index)
                 rotateFlipAnimationB.start()
             }
-            override fun onAnimationCancel(p0: Animator) {}
-            override fun onAnimationRepeat(p0: Animator) {}
         })
         rotateFlipAnimationA.start()
     }

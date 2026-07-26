@@ -14,5 +14,4 @@ class SaturatedBlock : BlockPainter {
         BlockType.SQUARE_BLOCK -> R.drawable.squareblocksaturated
         BlockType.T_BLOCK -> R.drawable.tblocksaturated
     }
-
 }

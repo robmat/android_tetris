@@ -7,7 +7,11 @@ import java.util.*
 data class GameResult(
     val score: Int,
     val date: Date
-) : Serializable
+) : Serializable {
+    companion object {
+        private const val serialVersionUID = 1L
+    }
+}
 
 object DateGetter {
     private const val DATE_FORMAT = "EEEE, dd-MMM-yyyy hh-mm-ss a"
@@ -16,5 +20,4 @@ object DateGetter {
         val formatter = SimpleDateFormat(DATE_FORMAT, Locale.getDefault())
         return formatter.format(date)
     }
-
 }

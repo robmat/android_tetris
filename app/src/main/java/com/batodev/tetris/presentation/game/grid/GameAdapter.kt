@@ -11,12 +11,16 @@ class GameAdapter(
     private val colorChooser: ColorCellChooser,
 ) : BaseAdapter() {
 
-    override fun getCount(): Int = 10 * 20
+    companion object {
+        private const val GRID_COLUMNS = 10
+        private const val GRID_ROWS = 20
+    }
+
+    override fun getCount(): Int = GRID_COLUMNS * GRID_ROWS
 
     override fun getItem(p0: Int): Any = gameCells[p0]
 
     override fun getItemId(p0: Int): Long = p0.toLong()
 
     override fun getView(p0: Int, p1: View?, p2: ViewGroup?) = colorChooser.paint(gameCells[p0], p1, p2)
-
 }

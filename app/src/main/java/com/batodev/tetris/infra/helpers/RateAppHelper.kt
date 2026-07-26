@@ -13,7 +13,6 @@ import com.google.android.play.core.review.ReviewException
 import com.google.android.play.core.review.ReviewManagerFactory
 import com.google.android.play.core.review.model.ReviewErrorCode
 
-
 const val WHEN_TO_SHOW_APP_RATE_POPUP_DEFAULT = 10
 private const val DO_NOT_SHOW_ADS_EVER = Integer.MIN_VALUE
 
@@ -79,7 +78,6 @@ object RateAppHelper {
                         // matter the result, we continue our app flow.
                         Log.d(RateAppHelper.javaClass.simpleName, "Review ok")
                     }
-
                 } else {
                     // There was some problem, log or handle the error code.
                     @ReviewErrorCode val reviewErrorCode =
@@ -91,7 +89,9 @@ object RateAppHelper {
             popupWindow.dismiss()
             prefs.whenToShowAds = WHEN_TO_SHOW_ADS_DEFAULT * 2
             SettingsHelper.save(activity, prefs)
-            Log.d(RateAppHelper.javaClass.simpleName, "saved WHEN_TO_SHOW_ADS: ${WHEN_TO_SHOW_ADS_DEFAULT * 2}"
+            Log.d(
+                RateAppHelper.javaClass.simpleName,
+                "saved WHEN_TO_SHOW_ADS: ${WHEN_TO_SHOW_ADS_DEFAULT * 2}"
             )
         }
         val btnRateLater = popupView.findViewById<Button>(R.id.btnRateLater)

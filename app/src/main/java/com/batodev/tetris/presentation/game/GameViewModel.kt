@@ -140,5 +140,4 @@ class GameViewModel : ViewModel() {
     fun setUpImage(fileName: String) {
         imageName.value = fileName
     }
-
 }
