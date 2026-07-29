@@ -13,6 +13,11 @@ dependencyResolutionManagement {
         mavenCentral()
         maven { url "https://jitpack.io" }
     }
+    versionCatalogs {
+        libs {
+            from(files("../release-tools/gradle/libs.versions.toml"))
+        }
+    }
 }
 rootProject.name = "Tetris"
 include ':app'
