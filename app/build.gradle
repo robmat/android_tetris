@@ -3,8 +3,6 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'com.github.triplet.play'
     id 'com.batodev.releasetools'
-    id 'com.github.ben-manes.versions'
-    id 'se.patrikerdes.use-latest-versions'
     id 'io.gitlab.arturbosch.detekt'
 }
 
@@ -73,35 +71,35 @@ detekt {
 }
 
 dependencies {
-    detektPlugins 'io.gitlab.arturbosch.detekt:detekt-formatting:1.23.8'
+    detektPlugins libs.detekt.formatting
 
-    implementation 'androidx.core:core-ktx:1.19.0'
-    implementation 'androidx.appcompat:appcompat:1.7.1'
-    implementation 'com.google.android.material:material:1.14.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.2.1'
-    implementation 'androidx.preference:preference-ktx:1.2.1'
-    implementation 'com.github.chrisbanes:PhotoView:2.3.0'
-    implementation 'com.google.android.gms:play-services-ads:25.4.0'
-    implementation 'com.google.android.play:review-ktx:2.0.2'
-    implementation 'com.google.code.gson:gson:2.14.0'
+    implementation libs.androidx.core.ktx
+    implementation libs.androidx.appcompat
+    implementation libs.material
+    implementation libs.androidx.constraintlayout
+    implementation libs.androidx.preference.ktx
+    implementation libs.chrisbanes.photoview
+    implementation libs.play.services.ads
+    implementation libs.google.play.review.ktx
+    implementation libs.google.code.gson
 
     // Android X activities, fragments and ui elements
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.9.1'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.9.1'
-    implementation "androidx.activity:activity-ktx:1.13.0"
-    implementation "androidx.fragment:fragment-ktx:1.8.8"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-compose:2.11.0"
+    implementation libs.androidx.navigation.fragment.ktx
+    implementation libs.androidx.navigation.ui.ktx
+    implementation libs.androidx.activity.ktx
+    implementation libs.androidx.fragment.ktx
+    implementation libs.androidx.lifecycle.viewmodel.compose
 
     // View extras
-    implementation "androidx.core:core-splashscreen:1.2.0"
-    implementation 'nl.dionsegijn:konfetti-xml:2.0.4'
+    implementation libs.androidx.core.splashscreen
+    implementation libs.dionsegijn.konfetti.xml
 
     // Logic
     implementation files("tetris-2.3.0.jar")
 
     // Testing
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.3.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.7.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-intents:3.7.0'
+    testImplementation libs.junit
+    androidTestImplementation libs.androidx.test.ext.junit
+    androidTestImplementation libs.androidx.test.espresso.core
+    androidTestImplementation libs.androidx.test.espresso.intents
 }
