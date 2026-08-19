@@ -12,6 +12,9 @@ sealed class UiText {
             is PrimitiveString -> value
             is ResourceString -> {
                 val newArgs = this.args.map { if (it is UiText) it.asString(context) else it }.toTypedArray()
+                // Context.getString's formatArgs is a Java vararg; Kotlin has no way to forward a
+                // runtime-sized array into a vararg call except the spread operator.
+                @Suppress("SpreadOperator")
                 context.getString(resourceId, *newArgs)
             }
         }

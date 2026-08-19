@@ -47,7 +47,7 @@ class GalleryActivity : Activity() {
         checkIfImageLeftRightButtonsShouldBeVisible()
     }
 
-    fun backClicked(view: View) {
+    fun backClicked(ignored: View) {
         Intent(this, MainActivity::class.java).apply {
             addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
             startActivity(this)
@@ -55,7 +55,7 @@ class GalleryActivity : Activity() {
         finish()
     }
 
-    fun leftClicked(view: View) {
+    fun leftClicked(ignored: View) {
         if (index != 0) index--
         animateTileFlip(findViewById<PhotoView>(R.id.photoView), this, true)
         val settingsData = SettingsHelper.load(this)
@@ -66,7 +66,7 @@ class GalleryActivity : Activity() {
         SettingsHelper.save(this, settingsData)
     }
 
-    fun rightClicked(view: View) {
+    fun rightClicked(ignored: View) {
         if (index < images.size) index++
         animateTileFlip(findViewById<PhotoView>(R.id.photoView), this, false)
         val settingsData = SettingsHelper.load(this)
@@ -104,7 +104,7 @@ class GalleryActivity : Activity() {
         }
     }
 
-    fun shareClicked(view: View) {
+    fun shareClicked(ignored: View) {
         val currentImageName = images[index]
         val inputStream = ImageHelper.imageStreamByName(this, currentImageName)
 
