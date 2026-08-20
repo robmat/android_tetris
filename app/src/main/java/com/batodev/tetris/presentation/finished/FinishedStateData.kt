@@ -4,7 +4,7 @@ import java.io.Serializable
 
 data class FinishedStateData(
     val email: String = "",
-    val emailError: String? = null
+    val emailError: String? = null,
 ) : Serializable {
     companion object {
         private const val serialVersionUID = 1L

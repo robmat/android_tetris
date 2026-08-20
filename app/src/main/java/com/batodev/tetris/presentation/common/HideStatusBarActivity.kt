@@ -13,20 +13,19 @@ import com.batodev.tetris.R
 import kotlin.system.exitProcess
 
 open class HideStatusBarActivity : AppCompatActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         hideStatusBar()
         super.onCreate(savedInstanceState)
         onBackPressedDispatcher.addCallback(this) {
-            AlertDialog.Builder(this@HideStatusBarActivity)
+            AlertDialog
+                .Builder(this@HideStatusBarActivity)
                 .setTitle(R.string.warning)
                 .setMessage(R.string.quitAppMessage)
                 .setNegativeButton(R.string.cancel) { _, _ -> hideStatusBar() }
                 .setPositiveButton(R.string.ok) { _, _ ->
                     finishAffinity()
                     exitProcess(0)
-                }
-                .create()
+                }.create()
                 .show()
         }
     }
@@ -66,7 +65,7 @@ open class HideStatusBarActivity : AppCompatActivity() {
                         or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                         or View.SYSTEM_UI_FLAG_FULLSCREEN
                         or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-                    )
+                )
             }
         }
     }

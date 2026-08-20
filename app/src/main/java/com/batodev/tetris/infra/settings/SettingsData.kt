@@ -13,7 +13,7 @@ data class SettingsData(
     var showRateAppPopupEveryXActions: Int = 2,
     var whenToShowAds: Int = WHEN_TO_SHOW_ADS_DEFAULT,
     var actionCount: Int = 0,
-    var whenToShowRateAppPopup: Int = WHEN_TO_SHOW_APP_RATE_POPUP_DEFAULT
+    var whenToShowRateAppPopup: Int = WHEN_TO_SHOW_APP_RATE_POPUP_DEFAULT,
 ) : Serializable {
     companion object {
         private const val serialVersionUID = 1L

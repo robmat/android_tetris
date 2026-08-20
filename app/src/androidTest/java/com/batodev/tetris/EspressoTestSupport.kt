@@ -1,5 +1,6 @@
 package com.batodev.tetris
 
+import android.view.View
 import androidx.activity.ComponentActivity
 import androidx.lifecycle.Lifecycle
 import androidx.test.core.app.ActivityScenario
@@ -15,7 +16,6 @@ import androidx.test.espresso.matcher.ViewMatchers.withText
 import com.batodev.tetris.infra.settings.SettingsData
 import com.batodev.tetris.infra.settings.SettingsHelper
 import com.batodev.tetris.presentation.main.MainActivity
-import android.view.View
 import org.hamcrest.Matchers.not
 import org.hamcrest.Matchers.sameInstance
 import org.junit.Assert.assertEquals
@@ -75,7 +75,10 @@ fun assertQuitDialogCancelable(scenario: ActivityScenario<out ComponentActivity>
     assertNotEquals(Lifecycle.State.DESTROYED, scenario.state)
 }
 
-fun assertEventuallyDestroyed(scenario: ActivityScenario<*>, timeoutMs: Long = 8_000) {
+fun assertEventuallyDestroyed(
+    scenario: ActivityScenario<*>,
+    timeoutMs: Long = 8_000,
+) {
     val deadline = System.currentTimeMillis() + timeoutMs
     while (scenario.state != Lifecycle.State.DESTROYED && System.currentTimeMillis() < deadline) {
         Thread.sleep(50)

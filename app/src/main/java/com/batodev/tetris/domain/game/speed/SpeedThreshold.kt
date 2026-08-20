@@ -7,7 +7,10 @@ import score.Points
  * associated [speedMs] applies while the points value is strictly below
  * [upperBound].
  */
-data class SpeedThreshold(val upperBound: Int, val speedMs: Long)
+data class SpeedThreshold(
+    val upperBound: Int,
+    val speedMs: Long,
+)
 
 /**
  * Looks up the game speed for [points] using an ascending list of
@@ -18,5 +21,5 @@ data class SpeedThreshold(val upperBound: Int, val speedMs: Long)
 fun speedInMillisecondsFromThresholds(
     points: Points,
     thresholds: List<SpeedThreshold>,
-    defaultSpeedMs: Long
+    defaultSpeedMs: Long,
 ): Long = thresholds.firstOrNull { points.value < it.upperBound }?.speedMs ?: defaultSpeedMs

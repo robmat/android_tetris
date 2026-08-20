@@ -11,15 +11,19 @@ import com.batodev.tetris.infra.logs.LoggerConstants.ROTATE_RIGHT
 import com.batodev.tetris.presentation.common.UiText
 
 object MemoryLogger : Logger {
-
     private val messages: MutableList<UiText> = mutableListOf()
     private val movements: MutableMap<UiText, Int> = mutableMapOf()
 
     override fun add(message: UiText) {
         when (message) {
-            MOVE_DOWN, MOVE_LEFT, MOVE_RIGHT, ROTATE_LEFT, ROTATE_RIGHT, DROP_DOWN -> movements[message] =
-                movements.getOrElse(message) { 0 }.plus(1)
-            else -> messages.add(message)
+            MOVE_DOWN, MOVE_LEFT, MOVE_RIGHT, ROTATE_LEFT, ROTATE_RIGHT, DROP_DOWN -> {
+                movements[message] =
+                    movements.getOrElse(message) { 0 }.plus(1)
+            }
+
+            else -> {
+                messages.add(message)
+            }
         }
     }
 
@@ -30,9 +34,9 @@ object MemoryLogger : Logger {
                 UiText.ResourceString(
                     R.string.result_movements_log,
                     it.key,
-                    it.value
+                    it.value,
                 )
-            }
+            },
         )
         return result
     }

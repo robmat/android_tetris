@@ -28,7 +28,6 @@ import org.junit.runner.RunWith
 // (MainActivity extends HideStatusBarActivity - see EspressoTestSupport.kt).
 @RunWith(AndroidJUnit4::class)
 class MainMenuTest {
-
     @Before
     fun setUp() {
         val context = InstrumentationRegistry.getInstrumentation().targetContext
@@ -119,4 +118,5 @@ class MainMenuTest {
 }
 
 private fun withText_playTheGameToUnlockImages() =
-    androidx.test.espresso.matcher.ViewMatchers.withText(R.string.playTheGameTounlockImages)
+    androidx.test.espresso.matcher.ViewMatchers
+        .withText(R.string.playTheGameTounlockImages)

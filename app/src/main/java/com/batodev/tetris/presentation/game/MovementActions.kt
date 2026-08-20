@@ -18,13 +18,21 @@ class MovementActions(
     private val isPaused: () -> Boolean,
 ) {
     fun left() = applyMove(LoggerConstants.MOVE_LEFT) { it.left() }
+
     fun right() = applyMove(LoggerConstants.MOVE_RIGHT) { it.right() }
+
     fun down() = applyMove(LoggerConstants.MOVE_DOWN) { it.down() }
+
     fun rotateLeft() = applyMove(LoggerConstants.ROTATE_LEFT) { it.rotateLeft() }
+
     fun rotateRight() = applyMove(LoggerConstants.ROTATE_RIGHT) { it.rotateRight() }
+
     fun dropBlock() = applyMove(LoggerConstants.DROP_DOWN) { it.dropBlock() }
 
-    private fun applyMove(logEvent: UiText, action: (GameFacade) -> Unit) {
+    private fun applyMove(
+        logEvent: UiText,
+        action: (GameFacade) -> Unit,
+    ) {
         if (validMovement()) {
             action(gameFacade.value!!)
             gameFacade.postValue(gameFacade.value)

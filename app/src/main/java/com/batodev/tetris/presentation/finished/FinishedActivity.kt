@@ -13,7 +13,6 @@ import com.batodev.tetris.presentation.game.GameActivity
 import com.batodev.tetris.presentation.game.fragments.IMAGES_WON_THIS_GAME
 
 class FinishedActivity : HideStatusBarActivity() {
-
     private lateinit var binding: ActivityFinishedBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,7 +34,7 @@ class FinishedActivity : HideStatusBarActivity() {
             startActivity(
                 Intent(this, GameActivity::class.java).apply {
                     addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                }
+                },
             )
             finish()
         }

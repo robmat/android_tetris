@@ -5,5 +5,9 @@ import android.view.ViewGroup
 import game.GameCell
 
 interface ColorCellChooser {
-    fun paint(gameCell: GameCell, p1: View?, parent: ViewGroup?): View
+    fun paint(
+        gameCell: GameCell,
+        p1: View?,
+        parent: ViewGroup?,
+    ): View
 }

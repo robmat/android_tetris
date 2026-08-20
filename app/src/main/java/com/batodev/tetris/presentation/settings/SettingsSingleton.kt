@@ -26,14 +26,16 @@ object SettingsSingleton : Serializable {
         val isGhost = preferences.getBoolean(context.getString(R.string.key_ghost), true)
         val hasMusic = preferences.getBoolean(context.getString(R.string.key_music), true)
         val hasSounds = preferences.getBoolean(context.getString(R.string.key_sounds), true)
-        val difficultyString = preferences.getString(
-            context.getString(R.string.key_difficulty),
-            context.getString(R.string.medium_key)
-        )
-        val themeString = preferences.getString(
-            context.getString(R.string.key_theme),
-            context.getString(R.string.neon_key)
-        )
+        val difficultyString =
+            preferences.getString(
+                context.getString(R.string.key_difficulty),
+                context.getString(R.string.medium_key),
+            )
+        val themeString =
+            preferences.getString(
+                context.getString(R.string.key_theme),
+                context.getString(R.string.neon_key),
+            )
         val level = Level.valueOf(difficultyString!!)
         val theme = Style.valueOf(themeString!!)
         return SettingsData(
@@ -42,7 +44,7 @@ object SettingsSingleton : Serializable {
             hasMusic = hasMusic,
             hasSounds = hasSounds,
             level = level,
-            style = theme
+            style = theme,
         )
     }
 
@@ -68,17 +70,18 @@ object SettingsSingleton : Serializable {
             UiText.ResourceString(R.string.player_name_log, settings.name),
         )
         LoggerGetter.get().add(
-            UiText.ResourceString(R.string.level_selected_log, settings.level.name)
+            UiText.ResourceString(R.string.level_selected_log, settings.level.name),
         )
         LoggerGetter.get().add(
-            UiText.ResourceString(R.string.ghost_mode_log, settings.isGhostBlock)
+            UiText.ResourceString(R.string.ghost_mode_log, settings.isGhostBlock),
         )
         LoggerGetter.get().add(
-            UiText.ResourceString(R.string.music_mode_log, settings.hasMusic)
+            UiText.ResourceString(R.string.music_mode_log, settings.hasMusic),
         )
-        LoggerGetter.get()
+        LoggerGetter
+            .get()
             .add(
-                UiText.ResourceString(R.string.theme_log, settings.style.name)
+                UiText.ResourceString(R.string.theme_log, settings.style.name),
             )
     }
 }

@@ -7,10 +7,12 @@ import androidx.core.view.children
 /**
  * Gets all the buttons recursively from a ViewGroup
  */
-fun ViewGroup.getButtons(): List<Button> =
-    getButtonsRecursive(this) { it is Button }.map { it as Button }
+fun ViewGroup.getButtons(): List<Button> = getButtonsRecursive(this) { it is Button }.map { it as Button }
 
-internal fun getButtonsRecursive(viewGroup: ViewGroup, strategy: (Any) -> Boolean): List<Any> {
+internal fun getButtonsRecursive(
+    viewGroup: ViewGroup,
+    strategy: (Any) -> Boolean,
+): List<Any> {
     val result = ArrayList<Any>()
     for (view in viewGroup.children) {
         if (view is ViewGroup) {

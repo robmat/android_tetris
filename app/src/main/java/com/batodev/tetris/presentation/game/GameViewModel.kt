@@ -8,7 +8,6 @@ import com.batodev.tetris.domain.game.speed.SpeedStrategy
 import kotlinx.coroutines.delay
 
 class GameViewModel : ViewModel() {
-
     val gameFacade: MutableLiveData<GameFacade> = MutableLiveData(null)
     private val updatedLog: MutableLiveData<Boolean> = MutableLiveData(false)
     private lateinit var speedStrategy: SpeedStrategy
@@ -18,7 +17,10 @@ class GameViewModel : ViewModel() {
     val music = MusicController()
     val movement = MovementActions(gameFacade, updatedLog) { state.isGamePaused() }
 
-    fun setUp(gameFacade: GameFacade, speed: SpeedStrategy) {
+    fun setUp(
+        gameFacade: GameFacade,
+        speed: SpeedStrategy,
+    ) {
         if (this.gameFacade.value == null) {
             gameFacade.start()
             this.gameFacade.value = gameFacade

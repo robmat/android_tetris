@@ -7,17 +7,20 @@ import android.net.Uri
 import android.widget.Toast
 import com.batodev.tetris.R
 
-class EmailSender(private val activity: Activity, private val emailData: EmailData) {
-
+class EmailSender(
+    private val activity: Activity,
+    private val emailData: EmailData,
+) {
     @SuppressLint("QueryPermissionsNeeded")
     fun send() {
-        val intent = Intent(Intent.ACTION_SEND).apply {
-            data = Uri.parse("mailto:")
-            type = "text/plain"
-            putExtra(Intent.EXTRA_EMAIL, arrayOf(emailData.destinationEmail))
-            putExtra(Intent.EXTRA_SUBJECT, emailData.subject)
-            putExtra(Intent.EXTRA_TEXT, emailData.text)
-        }
+        val intent =
+            Intent(Intent.ACTION_SEND).apply {
+                data = Uri.parse("mailto:")
+                type = "text/plain"
+                putExtra(Intent.EXTRA_EMAIL, arrayOf(emailData.destinationEmail))
+                putExtra(Intent.EXTRA_SUBJECT, emailData.subject)
+                putExtra(Intent.EXTRA_TEXT, emailData.text)
+            }
         if (intent.resolveActivity(activity.packageManager) != null) {
             activity.startActivity(intent)
             Toast.makeText(activity, activity.getText(R.string.opening_mail), Toast.LENGTH_LONG).show()

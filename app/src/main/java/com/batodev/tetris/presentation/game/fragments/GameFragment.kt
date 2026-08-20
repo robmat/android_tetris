@@ -34,8 +34,9 @@ import java.util.Date
 const val IMAGES_WON_THIS_GAME = "IMAGES_WON_THIS_GAME"
 
 @OptIn(ExperimentalCoroutinesApi::class)
-class GameFragment : Fragment(), View.OnClickListener {
-
+class GameFragment :
+    Fragment(),
+    View.OnClickListener {
     internal lateinit var tickPlayer: MediaPlayer
     internal lateinit var pointPlayer: MediaPlayer
     internal lateinit var imagePlayer: MediaPlayer
@@ -49,7 +50,10 @@ class GameFragment : Fragment(), View.OnClickListener {
     private val imageTierUnlock = ImageTierUnlockController(this)
     private lateinit var gameLifecycle: GameLifecycle
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
         this.view = view
         imageData = ImageHelper.pickTierOneImage(requireActivity())
@@ -67,21 +71,19 @@ class GameFragment : Fragment(), View.OnClickListener {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_game, container, false)
-    }
+        savedInstanceState: Bundle?,
+    ): View? = inflater.inflate(R.layout.fragment_game, container, false)
 
     private fun setUpViewModel() {
         val settingsData = SettingsSingleton.getSettingsData(requireContext())
         model = ViewModelProvider(requireActivity())[GameViewModel::class.java]
         model.setUp(
             SettingsSingleton.getFacade(requireContext()),
-            SettingsSingleton.getSpeedStrategy(requireContext())
+            SettingsSingleton.getSpeedStrategy(requireContext()),
         )
         model.music.setUp(
             settingsData.hasMusic,
-            requireContext()
+            requireContext(),
         )
         model.setUpImage(imageData.fileName)
         var lastScore = 0
@@ -92,8 +94,10 @@ class GameFragment : Fragment(), View.OnClickListener {
             requireView().findViewById<TextView>(R.id.PointsText).text = model.getPoints().toString()
             val typeOfBlock = model.getNextBlock()
             requireView().findViewById<ImageView>(R.id.NextBlockImage).setImageResource(
-                SettingsSingleton.getStyleCreator(requireContext()).getBlockCreator()
-                    .getImageId(typeOfBlock)
+                SettingsSingleton
+                    .getStyleCreator(requireContext())
+                    .getBlockCreator()
+                    .getImageId(typeOfBlock),
             )
         }
 
@@ -132,7 +136,8 @@ class GameFragment : Fragment(), View.OnClickListener {
     private fun setUpButtons() {
         (requireView() as ViewGroup).getButtons().forEach { it.setOnClickListener(this) }
         requireView().findViewById<PlayPauseView>(R.id.pauseButton).setOnClickListener(this)
-        requireView().findViewById<Button>(R.id.DownButton)
+        requireView()
+            .findViewById<Button>(R.id.DownButton)
             .setOnLongClickListener {
                 model.movement.dropBlock()
                 true
@@ -141,27 +146,29 @@ class GameFragment : Fragment(), View.OnClickListener {
 
     internal fun finishGame() {
         RateAppHelper.increaseRateAppCounterAndShowDialogIfApplicable(requireActivity())
-        val finish = Intent(requireContext(), FinishedActivity::class.java).apply {
-            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
-            putExtra(
-                GAME_RESULT,
-                GameResult(score = model.getPoints(), date = Date())
-            )
-            putExtra(IMAGES_WON_THIS_GAME, imagesWonThisGame.toTypedArray())
-        }
+        val finish =
+            Intent(requireContext(), FinishedActivity::class.java).apply {
+                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                putExtra(
+                    GAME_RESULT,
+                    GameResult(score = model.getPoints(), date = Date()),
+                )
+                putExtra(IMAGES_WON_THIS_GAME, imagesWonThisGame.toTypedArray())
+            }
         requireContext().startActivity(finish)
         requireActivity().finish()
     }
 
-    override fun onClick(p0: View) = when (p0.id) {
-        R.id.DownButton -> model.movement.down()
-        R.id.LeftButton -> model.movement.left()
-        R.id.RightButton -> model.movement.right()
-        R.id.RotateLeft -> model.movement.rotateLeft()
-        R.id.RotateRight -> model.movement.rotateRight()
-        R.id.pauseButton -> gameLifecycle.pauseButtonClicked()
-        else -> throw UnsupportedOperationException("Unknown button")
-    }
+    override fun onClick(p0: View) =
+        when (p0.id) {
+            R.id.DownButton -> model.movement.down()
+            R.id.LeftButton -> model.movement.left()
+            R.id.RightButton -> model.movement.right()
+            R.id.RotateLeft -> model.movement.rotateLeft()
+            R.id.RotateRight -> model.movement.rotateRight()
+            R.id.pauseButton -> gameLifecycle.pauseButtonClicked()
+            else -> throw UnsupportedOperationException("Unknown button")
+        }
 
     override fun onPause() {
         super.onPause()

@@ -14,14 +14,17 @@ import kotlinx.coroutines.launch
  * music together with the pause button's state, split out of [GameFragment]
  * since this was the bulk of its function count.
  */
-class GameLifecycle(private val fragment: GameFragment) {
+class GameLifecycle(
+    private val fragment: GameFragment,
+) {
     private val resumeAction: Action = ResumeToastAction(fragment.requireContext())
 
     fun startGame() {
         fragment.model.music.start()
-        fragment.moveBlockDown = fragment.lifecycleScope.launch(start = CoroutineStart.ATOMIC) {
-            fragment.model.runGame()
-        }
+        fragment.moveBlockDown =
+            fragment.lifecycleScope.launch(start = CoroutineStart.ATOMIC) {
+                fragment.model.runGame()
+            }
         fragment.requireView().findViewById<PlayPauseView>(R.id.pauseButton).setState(State.PLAY)
         fragment.requireView().findViewById<PlayPauseView>(R.id.pauseButton).fadeIn()
     }

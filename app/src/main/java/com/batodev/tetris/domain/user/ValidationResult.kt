@@ -4,5 +4,5 @@ import com.batodev.tetris.presentation.common.UiText
 
 data class ValidationResult(
     val success: Boolean,
-    val errorMessage: UiText? = null
+    val errorMessage: UiText? = null,
 )

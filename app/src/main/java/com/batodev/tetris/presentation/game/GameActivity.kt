@@ -6,7 +6,6 @@ import com.batodev.tetris.infra.settings.SettingsHelper
 import com.batodev.tetris.presentation.common.HideStatusBarActivity
 
 class GameActivity : HideStatusBarActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)

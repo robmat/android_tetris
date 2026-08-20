@@ -27,11 +27,12 @@ fun AppCompatActivity.openUnlockedGalleryOrPromptToPlay(rootView: View) {
 }
 
 private fun AppCompatActivity.showUnlockGalleryPrompt(rootView: View) {
-    val snackBar = Snackbar.make(
-        rootView,
-        getString(R.string.playTheGameTounlockImages),
-        Snackbar.LENGTH_SHORT
-    )
+    val snackBar =
+        Snackbar.make(
+            rootView,
+            getString(R.string.playTheGameTounlockImages),
+            Snackbar.LENGTH_SHORT,
+        )
     val params = snackBar.view.layoutParams as FrameLayout.LayoutParams
     params.gravity = Gravity.TOP
     snackBar.view.layoutParams = params

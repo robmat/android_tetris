@@ -37,14 +37,17 @@ import org.junit.runner.RunWith
 // into the initial index/button-visibility assertions.
 @RunWith(AndroidJUnit4::class)
 class GalleryActivityTest {
-
     private lateinit var images: Array<String>
 
     @Before
     fun setUp() {
         val context = InstrumentationRegistry.getInstrumentation().targetContext
         context.filesDir.resolve(SettingsHelper::class.java.simpleName).delete()
-        images = context.assets.list("pics/tier1")!!.take(3).toTypedArray()
+        images =
+            context.assets
+                .list("pics/tier1")!!
+                .take(3)
+                .toTypedArray()
         Intents.init()
     }
 
@@ -54,10 +57,11 @@ class GalleryActivityTest {
     }
 
     private fun launchWithImages(): ActivityScenario<GalleryActivity> {
-        val intent = Intent(
-            InstrumentationRegistry.getInstrumentation().targetContext,
-            GalleryActivity::class.java
-        ).apply { putExtra(IMAGES, images) }
+        val intent =
+            Intent(
+                InstrumentationRegistry.getInstrumentation().targetContext,
+                GalleryActivity::class.java,
+            ).apply { putExtra(IMAGES, images) }
         return ActivityScenario.launch(intent)
     }
 

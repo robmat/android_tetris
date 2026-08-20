@@ -9,15 +9,19 @@ import board.Cell
 import com.batodev.tetris.R
 import game.GameCell
 
-class NeonImageChooser(private val context: Context) :
-    ColorCellChooser {
-
+class NeonImageChooser(
+    private val context: Context,
+) : ColorCellChooser {
     companion object {
         private const val GRID_COLUMNS = 10
         private const val GRID_ROWS = 20
     }
 
-    override fun paint(gameCell: GameCell, convertView: View?, parent: ViewGroup?): View {
+    override fun paint(
+        gameCell: GameCell,
+        convertView: View?,
+        parent: ViewGroup?,
+    ): View {
         var convertView = convertView
         val layoutInflater =
             context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater

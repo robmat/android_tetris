@@ -13,7 +13,10 @@ class MusicController {
     private val lengthSong: MutableLiveData<Int> = MutableLiveData(0)
     private val song: MutableLiveData<MediaPlayer> = MutableLiveData(null)
 
-    fun setUp(hasMusic: Boolean, context: Context) {
+    fun setUp(
+        hasMusic: Boolean,
+        context: Context,
+    ) {
         if (hasMusic) {
             song.value = MediaPlayer.create(context, R.raw.tetristheme)
             song.value?.isLooping = true

@@ -10,11 +10,10 @@ import com.batodev.tetris.R
 
 enum class State {
     PLAY,
-    PAUSE
+    PAUSE,
 }
 
 class PlayPauseView : AppCompatImageView {
-
     constructor(context: Context) : super(context)
 
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
@@ -22,7 +21,7 @@ class PlayPauseView : AppCompatImageView {
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(
         context,
         attrs,
-        defStyleAttr
+        defStyleAttr,
     )
 
     private val playToPauseDrawable: AnimatedVectorDrawableCompat? =

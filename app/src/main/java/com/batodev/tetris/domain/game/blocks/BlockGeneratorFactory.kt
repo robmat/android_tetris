@@ -6,10 +6,10 @@ import block_factory.SimpleBlockQueueCreator
 import com.batodev.tetris.domain.game.Level
 
 object BlockGeneratorFactory {
-
-    fun getGenerator(level: Level) = when (level) {
-        Level.LOW -> SimpleBlockQueueCreator()
-        Level.MEDIUM -> AllBlockQueueCreator()
-        Level.HIGH -> RandomBlockCreator()
-    }
+    fun getGenerator(level: Level) =
+        when (level) {
+            Level.LOW -> SimpleBlockQueueCreator()
+            Level.MEDIUM -> AllBlockQueueCreator()
+            Level.HIGH -> RandomBlockCreator()
+        }
 }

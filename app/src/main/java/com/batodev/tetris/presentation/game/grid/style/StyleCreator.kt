@@ -5,5 +5,6 @@ import com.batodev.tetris.presentation.game.grid.colors.ColorCellChooser
 
 interface StyleCreator {
     fun getBlockCreator(): BlockPainter
+
     fun getColorCellChooser(): ColorCellChooser
 }

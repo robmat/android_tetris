@@ -17,9 +17,7 @@ const val WHEN_TO_SHOW_APP_RATE_POPUP_DEFAULT = 10
 private const val DO_NOT_SHOW_ADS_EVER = Integer.MIN_VALUE
 
 object RateAppHelper {
-    fun increaseRateAppCounterAndShowDialogIfApplicable(
-        activity: Activity
-    ) {
+    fun increaseRateAppCounterAndShowDialogIfApplicable(activity: Activity) {
         val settings = SettingsHelper.load(activity)
         increaseRateAppCounterAndShowDialogIfApplicable(activity, settings)
         SettingsHelper.save(activity, settings)
@@ -27,7 +25,7 @@ object RateAppHelper {
 
     fun increaseRateAppCounterAndShowDialogIfApplicable(
         activity: Activity,
-        settings: SettingsData
+        settings: SettingsData,
     ): Boolean {
         Log.d(RateAppHelper.javaClass.simpleName, "increaseRateAppCounterAndShowDialogIfApplicable")
         val whenToShow = settings.whenToShowRateAppPopup
@@ -35,13 +33,13 @@ object RateAppHelper {
         if (actionCount == DO_NOT_SHOW_ADS_EVER) {
             Log.d(
                 RateAppHelper.javaClass.simpleName,
-                "doing nothing since actionCount: $actionCount"
+                "doing nothing since actionCount: $actionCount",
             )
             return true
         }
         Log.d(
             RateAppHelper.javaClass.simpleName,
-            "whenToShow: $whenToShow, actionCount: $actionCount"
+            "whenToShow: $whenToShow, actionCount: $actionCount",
         )
         if (++actionCount >= whenToShow) {
             showRateAppPopup(activity, settings)
@@ -50,19 +48,24 @@ object RateAppHelper {
         return false
     }
 
-    fun showRateAppPopup(activity: Activity, prefs: SettingsData) {
+    fun showRateAppPopup(
+        activity: Activity,
+        prefs: SettingsData,
+    ) {
         val inflater = activity.layoutInflater
-        val popupView = inflater.inflate(
-            R.layout.rate_app_popup,
-            activity.findViewById(R.id.gallery_activity_layout),
-            false
-        )
-        val popupWindow = PopupWindow(
-            popupView,
-            ViewGroup.LayoutParams.WRAP_CONTENT,
-            ViewGroup.LayoutParams.WRAP_CONTENT,
-            true
-        )
+        val popupView =
+            inflater.inflate(
+                R.layout.rate_app_popup,
+                activity.findViewById(R.id.gallery_activity_layout),
+                false,
+            )
+        val popupWindow =
+            PopupWindow(
+                popupView,
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                true,
+            )
         val btnRateNow = popupView.findViewById<Button>(R.id.btnRateNow)
         btnRateNow.setOnClickListener {
             onNeverPressed(activity, prefs)
@@ -91,7 +94,7 @@ object RateAppHelper {
             SettingsHelper.save(activity, prefs)
             Log.d(
                 RateAppHelper.javaClass.simpleName,
-                "saved WHEN_TO_SHOW_ADS: ${WHEN_TO_SHOW_ADS_DEFAULT * 2}"
+                "saved WHEN_TO_SHOW_ADS: ${WHEN_TO_SHOW_ADS_DEFAULT * 2}",
             )
         }
         val btnRateLater = popupView.findViewById<Button>(R.id.btnRateLater)
@@ -112,13 +115,19 @@ object RateAppHelper {
         }
     }
 
-    private fun onNeverPressed(activity: Activity, prefs: SettingsData) {
+    private fun onNeverPressed(
+        activity: Activity,
+        prefs: SettingsData,
+    ) {
         prefs.actionCount = DO_NOT_SHOW_ADS_EVER
         SettingsHelper.save(activity, prefs)
         Log.d(RateAppHelper.javaClass.simpleName, "saved actionCount: $DO_NOT_SHOW_ADS_EVER")
     }
 
-    private fun onLaterPressed(activity: Activity, prefs: SettingsData) {
+    private fun onLaterPressed(
+        activity: Activity,
+        prefs: SettingsData,
+    ) {
         prefs.actionCount = 0
         SettingsHelper.save(activity, prefs)
         Log.d(RateAppHelper.javaClass.simpleName, "saved actionCount: 0")

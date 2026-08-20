@@ -17,7 +17,6 @@ import org.junit.runner.RunWith
 // leaving it (its own back button, the system back gesture).
 @RunWith(AndroidJUnit4::class)
 class SettingsActivityTest {
-
     @Test
     fun backButtonFinishesActivity() {
         val scenario = ActivityScenario.launch(SettingsActivity::class.java)

@@ -20,28 +20,27 @@ object ImageHelper {
     private const val ASPECT_RATIO_HEIGHT = 550
     private const val ASPECT_RATIO_SCALE = 5
 
-    fun imageStreamByName(activity: Activity, name: String): InputStream {
-        val tier = listOf("pics/tier1", "pics/tier2", "pics/tier3")
-            .firstOrNull { activity.assets.list(it)!!.contains(name) }
-            ?: throw NoSuchElementException("no image by name: $name")
+    fun imageStreamByName(
+        activity: Activity,
+        name: String,
+    ): InputStream {
+        val tier =
+            listOf("pics/tier1", "pics/tier2", "pics/tier3")
+                .firstOrNull { activity.assets.list(it)!!.contains(name) }
+                ?: throw NoSuchElementException("no image by name: $name")
         return activity.assets.open("$tier/$name")
     }
 
-    fun imageBitmapByName(activity: Activity, name: String): Bitmap {
-        return BitmapFactory.decodeStream(imageStreamByName(activity, name))
-    }
+    fun imageBitmapByName(
+        activity: Activity,
+        name: String,
+    ): Bitmap = BitmapFactory.decodeStream(imageStreamByName(activity, name))
 
-    fun pickTierOneImage(activity: Activity): ImageData {
-        return pickImage(activity, "pics/tier1")
-    }
+    fun pickTierOneImage(activity: Activity): ImageData = pickImage(activity, "pics/tier1")
 
-    fun pickTierTwoImage(activity: Activity): ImageData {
-        return pickImage(activity, "pics/tier2")
-    }
+    fun pickTierTwoImage(activity: Activity): ImageData = pickImage(activity, "pics/tier2")
 
-    fun pickTierThreeImage(activity: Activity): ImageData {
-        return pickImage(activity, "pics/tier3")
-    }
+    fun pickTierThreeImage(activity: Activity): ImageData = pickImage(activity, "pics/tier3")
 
     private fun pickImage(
         activity: Activity,
@@ -59,8 +58,9 @@ object ImageHelper {
     }
 
     private fun cropToAspectRatio(bitmap: Bitmap): Bitmap {
-        val aspectRatio: BigDecimal = BigDecimal(ASPECT_RATIO_WIDTH)
-            .divide(BigDecimal(ASPECT_RATIO_HEIGHT), ASPECT_RATIO_SCALE, RoundingMode.HALF_UP)
+        val aspectRatio: BigDecimal =
+            BigDecimal(ASPECT_RATIO_WIDTH)
+                .divide(BigDecimal(ASPECT_RATIO_HEIGHT), ASPECT_RATIO_SCALE, RoundingMode.HALF_UP)
         val width = BigDecimal(bitmap.width)
         val height = BigDecimal(bitmap.height)
 
@@ -87,13 +87,17 @@ object ImageHelper {
         return Bitmap.createBitmap(bitmap, rect.left, rect.top, rect.width(), rect.height())
     }
 
-    fun getRoundedCornerBitmap(bitmap: Bitmap, pixels: Int): Bitmap {
-        val output = Bitmap.createBitmap(
-            bitmap.width,
-            bitmap
-                .height,
-            Bitmap.Config.ARGB_8888
-        )
+    fun getRoundedCornerBitmap(
+        bitmap: Bitmap,
+        pixels: Int,
+    ): Bitmap {
+        val output =
+            Bitmap.createBitmap(
+                bitmap.width,
+                bitmap
+                    .height,
+                Bitmap.Config.ARGB_8888,
+            )
         val canvas = Canvas(output)
         val color = -0xbdbdbe
         val paint = Paint()

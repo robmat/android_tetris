@@ -22,7 +22,7 @@ object AdHelper {
 
     fun showAddIfNeeded(
         activity: Activity,
-        settings: SettingsData
+        settings: SettingsData,
     ) {
         var adCounter = settings.adCounter
         val whenToShowAds = settings.whenToShowAds
@@ -56,7 +56,7 @@ object AdHelper {
                     // Handle the error
                     Log.w(AdHelper::class.simpleName, "onAdFailedToLoad: $loadAdError")
                 }
-            }
+            },
         )
     }
 }

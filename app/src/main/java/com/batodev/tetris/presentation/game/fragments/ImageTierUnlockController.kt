@@ -22,7 +22,9 @@ import java.util.concurrent.TimeUnit
  * snackbar celebration), split out of [GameFragment] since this was the bulk
  * of its function count.
  */
-class ImageTierUnlockController(private val fragment: GameFragment) {
+class ImageTierUnlockController(
+    private val fragment: GameFragment,
+) {
     companion object {
         private const val TIER_ONE_SCORE_REQUIRED = 200
         private const val TIER_TWO_SCORE_REQUIRED = 450
@@ -47,7 +49,10 @@ class ImageTierUnlockController(private val fragment: GameFragment) {
     private var tierThreeImageUncovered = false
 
     fun checkIfImageIsWon() {
-        val score = fragment.model.gameFacade.value!!.getScore().value
+        val score =
+            fragment.model.gameFacade.value!!
+                .getScore()
+                .value
         Log.d(GameFragment::class.java.simpleName, "Score: $score")
         if (score >= TIER_ONE_SCORE_REQUIRED && !tierOneImageUncovered) {
             tierOneImageUncovered = true
@@ -74,37 +79,40 @@ class ImageTierUnlockController(private val fragment: GameFragment) {
         if (settingsData.hasSounds) {
             fragment.imagePlayer.start()
         }
-        val party = Party(
-            speed = 0f,
-            maxSpeed = CONFETTI_MAX_SPEED,
-            damping = CONFETTI_DAMPING,
-            spread = CONFETTI_SPREAD_DEGREES,
-            colors = listOf(CONFETTI_COLOR_1, CONFETTI_COLOR_2, CONFETTI_COLOR_3, CONFETTI_COLOR_4),
-            emitter = Emitter(duration = CONFETTI_EMITTER_DURATION_MS, TimeUnit.MILLISECONDS)
-                .max(CONFETTI_EMITTER_MAX_PARTICLES),
-            position = Position.Relative(CONFETTI_POSITION_X, CONFETTI_POSITION_Y)
-        )
+        val party =
+            Party(
+                speed = 0f,
+                maxSpeed = CONFETTI_MAX_SPEED,
+                damping = CONFETTI_DAMPING,
+                spread = CONFETTI_SPREAD_DEGREES,
+                colors = listOf(CONFETTI_COLOR_1, CONFETTI_COLOR_2, CONFETTI_COLOR_3, CONFETTI_COLOR_4),
+                emitter =
+                    Emitter(duration = CONFETTI_EMITTER_DURATION_MS, TimeUnit.MILLISECONDS)
+                        .max(CONFETTI_EMITTER_MAX_PARTICLES),
+                position = Position.Relative(CONFETTI_POSITION_X, CONFETTI_POSITION_Y),
+            )
         val konfetti = fragment.requireView().findViewById<KonfettiView>(R.id.konfettiView)
         konfetti.visibility = View.VISIBLE
         konfetti.start(party)
-        konfetti.onParticleSystemUpdateListener = object : OnParticleSystemUpdateListener {
-            override fun onParticleSystemEnded(
-                view: KonfettiView,
-                party: Party,
-                activeSystems: Int
-            ) {
-                konfetti.visibility = View.GONE
-                Log.d(GameFragment::class.java.simpleName, "confetti end: $konfetti")
-            }
+        konfetti.onParticleSystemUpdateListener =
+            object : OnParticleSystemUpdateListener {
+                override fun onParticleSystemEnded(
+                    view: KonfettiView,
+                    party: Party,
+                    activeSystems: Int,
+                ) {
+                    konfetti.visibility = View.GONE
+                    Log.d(GameFragment::class.java.simpleName, "confetti end: $konfetti")
+                }
 
-            override fun onParticleSystemStarted(
-                view: KonfettiView,
-                party: Party,
-                activeSystems: Int
-            ) {
-                Log.d(GameFragment::class.java.simpleName, "confetti start: $konfetti")
+                override fun onParticleSystemStarted(
+                    view: KonfettiView,
+                    party: Party,
+                    activeSystems: Int,
+                ) {
+                    Log.d(GameFragment::class.java.simpleName, "confetti start: $konfetti")
+                }
             }
-        }
     }
 
     private fun showTopSnackBar() {
@@ -120,7 +128,7 @@ class ImageTierUnlockController(private val fragment: GameFragment) {
         Log.d(GameFragment::class.java.simpleName, "image won newImageTier: $newImageTier")
         Log.d(
             GameFragment::class.java.simpleName,
-            "image won imageData.fileName: ${fragment.imageData.fileName}"
+            "image won imageData.fileName: ${fragment.imageData.fileName}",
         )
         val settingsData = SettingsHelper.load(fragment.requireActivity())
         val imagesWon = settingsData.imagesWon

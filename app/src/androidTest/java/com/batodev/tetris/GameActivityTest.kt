@@ -19,7 +19,6 @@ import org.junit.runner.RunWith
 // a direct Intent launch).
 @RunWith(AndroidJUnit4::class)
 class GameActivityTest {
-
     @Test
     fun launchesShowingGridAndControls() {
         val scenario = ActivityScenario.launch(GameActivity::class.java)

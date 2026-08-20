@@ -16,8 +16,9 @@ import com.batodev.tetris.presentation.common.openUnlockedGalleryOrPromptToPlay
 import com.batodev.tetris.presentation.game.GameActivity
 import com.batodev.tetris.presentation.settings.SettingsActivity
 
-class MainActivity : HideStatusBarActivity(), View.OnClickListener {
-
+class MainActivity :
+    HideStatusBarActivity(),
+    View.OnClickListener {
     private lateinit var binding: ActivityMainBinding
     private val viewModel: MainModel = MainModel()
 
@@ -54,14 +55,15 @@ class MainActivity : HideStatusBarActivity(), View.OnClickListener {
 
     private fun moreApps() {
         startActivity(
-            Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/dev?id=8228670503574649511"))
+            Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/dev?id=8228670503574649511")),
         )
     }
 
     private fun startGameActivity() {
-        val game = Intent(this, GameActivity::class.java).apply {
-            addFlags(FLAG_ACTIVITY_NEW_TASK or FLAG_ACTIVITY_CLEAR_TASK)
-        }
+        val game =
+            Intent(this, GameActivity::class.java).apply {
+                addFlags(FLAG_ACTIVITY_NEW_TASK or FLAG_ACTIVITY_CLEAR_TASK)
+            }
         startActivity(game)
     }
 

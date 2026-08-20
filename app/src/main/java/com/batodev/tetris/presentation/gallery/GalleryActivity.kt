@@ -133,24 +133,27 @@ class GalleryActivity : Activity() {
     private fun animateTileFlip(
         tileView: View,
         gameActivity: GalleryActivity,
-        rightClicked: Boolean
+        rightClicked: Boolean,
     ) {
         val imgFlipA = if (rightClicked) R.animator.img_flip_a else R.animator.img_flip_c
         val imgFlipB = if (rightClicked) R.animator.img_flip_b else R.animator.img_flip_d
         val rotateFlipAnimationA =
             AnimatorInflater.loadAnimator(this, imgFlipA) as AnimatorSet
         rotateFlipAnimationA.setTarget(tileView)
-        rotateFlipAnimationA.addListener(object : AnimatorListenerAdapter() {
-            override fun onAnimationEnd(animation: Animator) {
-                val rotateFlipAnimationB = AnimatorInflater.loadAnimator(
-                    gameActivity,
-                    imgFlipB
-                ) as AnimatorSet
-                rotateFlipAnimationB.setTarget(tileView)
-                setImage(index)
-                rotateFlipAnimationB.start()
-            }
-        })
+        rotateFlipAnimationA.addListener(
+            object : AnimatorListenerAdapter() {
+                override fun onAnimationEnd(animation: Animator) {
+                    val rotateFlipAnimationB =
+                        AnimatorInflater.loadAnimator(
+                            gameActivity,
+                            imgFlipB,
+                        ) as AnimatorSet
+                    rotateFlipAnimationB.setTarget(tileView)
+                    setImage(index)
+                    rotateFlipAnimationB.start()
+                }
+            },
+        )
         rotateFlipAnimationA.start()
     }
 }

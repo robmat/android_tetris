@@ -2,11 +2,12 @@ package com.batodev.tetris.presentation.game.results
 
 import java.io.Serializable
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
+import java.util.Locale
 
 data class GameResult(
     val score: Int,
-    val date: Date
+    val date: Date,
 ) : Serializable {
     companion object {
         private const val serialVersionUID = 1L

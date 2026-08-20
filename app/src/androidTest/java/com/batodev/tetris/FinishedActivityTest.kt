@@ -25,21 +25,25 @@ import org.junit.runner.RunWith
 // bitmap-decoding path is exercised rather than skipped.
 @RunWith(AndroidJUnit4::class)
 class FinishedActivityTest {
-
     private lateinit var wonImages: Array<String>
 
     @Before
     fun setUp() {
         val context = InstrumentationRegistry.getInstrumentation().targetContext
-        wonImages = context.assets.list("pics/tier1")!!.take(2).toTypedArray()
+        wonImages =
+            context.assets
+                .list("pics/tier1")!!
+                .take(2)
+                .toTypedArray()
         context.filesDir.resolve(SettingsHelper::class.java.simpleName).delete()
     }
 
     private fun launchWithWonImages(): ActivityScenario<FinishedActivity> {
-        val intent = Intent(
-            InstrumentationRegistry.getInstrumentation().targetContext,
-            FinishedActivity::class.java
-        ).apply { putExtra(IMAGES_WON_THIS_GAME, wonImages) }
+        val intent =
+            Intent(
+                InstrumentationRegistry.getInstrumentation().targetContext,
+                FinishedActivity::class.java,
+            ).apply { putExtra(IMAGES_WON_THIS_GAME, wonImages) }
         return ActivityScenario.launch(intent)
     }
 

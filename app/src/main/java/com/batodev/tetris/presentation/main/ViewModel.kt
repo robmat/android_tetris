@@ -10,7 +10,6 @@ import kotlinx.coroutines.launch
 internal const val SPLASHSCREEN_SHOW_TIME = 1000L
 
 class MainModel : ViewModel() {
-
     private val _isLoading = MutableStateFlow(true)
     val isLoading = _isLoading.asStateFlow()
 

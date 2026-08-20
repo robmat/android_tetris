@@ -24,21 +24,24 @@ object SettingsHelper {
             Log.e(
                 SettingsHelper::class.java.simpleName,
                 "classes incompatible, will delete settings",
-                e
+                e,
             )
             settingsFile.delete()
         } catch (e: JsonParseException) {
             Log.e(
                 SettingsHelper::class.java.simpleName,
                 "classes incompatible, will delete settings",
-                e
+                e,
             )
             settingsFile.delete()
         }
         return SettingsData()
     }
 
-    fun save(activity: Activity, settingsData: SettingsData): SettingsData {
+    fun save(
+        activity: Activity,
+        settingsData: SettingsData,
+    ): SettingsData {
         val settingsFile = settingsFile(activity)
         return try {
             settingsFile.delete()
@@ -51,13 +54,12 @@ object SettingsHelper {
             Log.e(
                 SettingsHelper::class.java.simpleName,
                 "error saving, will delete settings and retry",
-                e
+                e,
             )
             settingsFile.delete()
             save(activity, settingsData)
         }
     }
 
-    private fun settingsFile(activity: Activity) =
-        File(activity.filesDir, SettingsHelper::class.java.simpleName)
+    private fun settingsFile(activity: Activity) = File(activity.filesDir, SettingsHelper::class.java.simpleName)
 }
