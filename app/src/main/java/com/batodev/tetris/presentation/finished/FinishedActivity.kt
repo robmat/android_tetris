@@ -2,20 +2,15 @@ package com.batodev.tetris.presentation.finished
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.Gravity
 import android.widget.Button
-import android.widget.FrameLayout
 import android.widget.ImageView
 import com.batodev.tetris.R
 import com.batodev.tetris.databinding.ActivityFinishedBinding
 import com.batodev.tetris.infra.images.ImageHelper
-import com.batodev.tetris.infra.settings.SettingsHelper
 import com.batodev.tetris.presentation.common.HideStatusBarActivity
-import com.batodev.tetris.presentation.gallery.GalleryActivity
-import com.batodev.tetris.presentation.gallery.IMAGES
+import com.batodev.tetris.presentation.common.openUnlockedGalleryOrPromptToPlay
 import com.batodev.tetris.presentation.game.GameActivity
 import com.batodev.tetris.presentation.game.fragments.IMAGES_WON_THIS_GAME
-import com.google.android.material.snackbar.Snackbar
 
 class FinishedActivity : HideStatusBarActivity() {
 
@@ -45,22 +40,7 @@ class FinishedActivity : HideStatusBarActivity() {
             finish()
         }
         findViewById<Button>(R.id.finished_activity_unlocked_gallery).setOnClickListener {
-            val imagesWon = SettingsHelper.load(this).imagesWon
-            if (imagesWon.isNotEmpty()) {
-                val intent = Intent(this, GalleryActivity::class.java)
-                intent.putExtra(IMAGES, imagesWon.toTypedArray())
-                startActivity(intent)
-            } else {
-                val snackBar = Snackbar.make(
-                    binding.root,
-                    getString(R.string.playTheGameTounlockImages),
-                    Snackbar.LENGTH_SHORT
-                )
-                val params = snackBar.view.layoutParams as FrameLayout.LayoutParams
-                params.gravity = Gravity.TOP
-                snackBar.view.layoutParams = params
-                snackBar.show()
-            }
+            openUnlockedGalleryOrPromptToPlay(binding.root)
             finish()
         }
     }
