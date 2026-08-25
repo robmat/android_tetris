@@ -79,6 +79,9 @@ class ImageTierUnlockController(
         if (settingsData.hasSounds) {
             fragment.imagePlayer.start()
         }
+        val emitter =
+            Emitter(duration = CONFETTI_EMITTER_DURATION_MS, TimeUnit.MILLISECONDS)
+                .max(CONFETTI_EMITTER_MAX_PARTICLES)
         val party =
             Party(
                 speed = 0f,
@@ -86,9 +89,7 @@ class ImageTierUnlockController(
                 damping = CONFETTI_DAMPING,
                 spread = CONFETTI_SPREAD_DEGREES,
                 colors = listOf(CONFETTI_COLOR_1, CONFETTI_COLOR_2, CONFETTI_COLOR_3, CONFETTI_COLOR_4),
-                emitter =
-                    Emitter(duration = CONFETTI_EMITTER_DURATION_MS, TimeUnit.MILLISECONDS)
-                        .max(CONFETTI_EMITTER_MAX_PARTICLES),
+                emitter = emitter,
                 position = Position.Relative(CONFETTI_POSITION_X, CONFETTI_POSITION_Y),
             )
         val konfetti = fragment.requireView().findViewById<KonfettiView>(R.id.konfettiView)

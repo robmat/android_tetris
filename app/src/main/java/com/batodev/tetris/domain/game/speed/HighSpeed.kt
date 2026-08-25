@@ -16,5 +16,6 @@ class HighSpeed : SpeedStrategy {
         private const val DEFAULT_SPEED_MS = 350L
     }
 
-    override fun getSpeedInMilliseconds(points: Points) = speedInMillisecondsFromThresholds(points, THRESHOLDS, DEFAULT_SPEED_MS)
+    override fun getSpeedInMilliseconds(points: Points) =
+        speedInMillisecondsFromThresholds(points, THRESHOLDS, DEFAULT_SPEED_MS)
 }
