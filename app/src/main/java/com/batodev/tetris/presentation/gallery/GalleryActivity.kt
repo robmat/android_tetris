@@ -6,12 +6,12 @@ import android.animation.AnimatorListenerAdapter
 import android.animation.AnimatorSet
 import android.app.Activity
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.view.Window
 import android.widget.Button
 import androidx.core.content.ContextCompat
+import androidx.core.net.toUri
 import com.batodev.tetris.R
 import com.batodev.tetris.infra.helpers.AdHelper
 import com.batodev.tetris.infra.helpers.RateAppHelper
@@ -122,7 +122,7 @@ class GalleryActivity : Activity() {
         outputStream.close()
         val shareIntent = Intent(Intent.ACTION_SEND)
         val uri =
-            Uri.parse("content://com.batodev.tetris.ImagesProvider/$tmpImgPath")
+            "content://com.batodev.tetris.ImagesProvider/$tmpImgPath".toUri()
         shareIntent.putExtra(Intent.EXTRA_STREAM, uri)
         shareIntent.clipData = android.content.ClipData.newRawUri("", uri)
         shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)

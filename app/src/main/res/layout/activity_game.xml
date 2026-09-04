@@ -6,9 +6,9 @@
     android:layout_height="match_parent"
     tools:context=".presentation.game.GameActivity">
 
-    <fragment
+    <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerView"
-        class="com.batodev.tetris.presentation.game.fragments.GameFragment"
+        android:name="com.batodev.tetris.presentation.game.fragments.GameFragment"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         app:layout_constraintBottom_toBottomOf="parent"

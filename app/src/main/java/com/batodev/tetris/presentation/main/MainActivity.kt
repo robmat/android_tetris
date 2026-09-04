@@ -3,9 +3,9 @@ package com.batodev.tetris.presentation.main
 import android.content.Intent
 import android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK
 import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
-import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import androidx.core.net.toUri
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.batodev.tetris.databinding.ActivityMainBinding
 import com.batodev.tetris.infra.helpers.RateAppHelper
@@ -55,7 +55,7 @@ class MainActivity :
 
     private fun moreApps() {
         startActivity(
-            Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/dev?id=8228670503574649511")),
+            Intent(Intent.ACTION_VIEW, "https://play.google.com/store/apps/dev?id=8228670503574649511".toUri()),
         )
     }
 

@@ -147,6 +147,9 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="spread">
 
+        <!-- NextBlockImage keeps an explicit 60x45dp size and is set via setImageResource() in
+             GameFragment.kt; a compound drawable would tie its size to the drawable's intrinsic
+             bounds instead, so the suggested merge is skipped. -->
         <LinearLayout
             android:id="@+id/linearLayout8"
             android:layout_width="wrap_content"
@@ -156,7 +159,8 @@
             app:layout_constraintEnd_toStartOf="@+id/linearLayout"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="UseCompoundDrawables">
 
             <TextView
                 android:id="@+id/nextBlockText"

@@ -3,8 +3,8 @@ package com.batodev.tetris.presentation.finished.sendmail
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
-import android.net.Uri
 import android.widget.Toast
+import androidx.core.net.toUri
 import com.batodev.tetris.R
 
 class EmailSender(
@@ -15,8 +15,7 @@ class EmailSender(
     fun send() {
         val intent =
             Intent(Intent.ACTION_SEND).apply {
-                data = Uri.parse("mailto:")
-                type = "text/plain"
+                setDataAndType("mailto:".toUri(), "text/plain")
                 putExtra(Intent.EXTRA_EMAIL, arrayOf(emailData.destinationEmail))
                 putExtra(Intent.EXTRA_SUBJECT, emailData.subject)
                 putExtra(Intent.EXTRA_TEXT, emailData.text)

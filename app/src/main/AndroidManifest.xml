@@ -22,6 +22,7 @@
         <activity
             android:name=".presentation.finished.FinishedActivity"
             android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoWindowBackground"
             tools:ignore="DiscouragedApi,LockedOrientationActivity"
             android:exported="false" />
         <activity

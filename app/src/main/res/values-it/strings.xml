@@ -1,21 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
 
-  <string name="help_button">Aiuto</string>
-  <string name="start_button">Inizio</string>
-  <string name="quit_button">Esentato</string>
   <string name="LeftButtonDesc">Sposta il blocco a sinistra</string>
   <string name="DownButtonDesc">Sposta il blocco verso il basso</string>
   <string name="RightButtonDesc">Sposta il blocco a destra</string>
   <string name="RotateLeftDesc">Ruota il blocco a sinistra</string>
   <string name="RotateRightDesc">Ruota il blocco a destra</string>
-  <string name="DayAndHourText">Giorno e Ora:</string>
-  <string name="valuesOfLogText">Valori del registro:</string>
-  <string name="emailDestination">Condividi il tuo punteggio:</string>
-  <string name="sendEmailButton">Invia una email</string>
-  <string name="newGameButton">Nuovo gioco</string>
-  <string name="exitButton">Uscita</string>
-  <string name="emailHint">jhondoe@gmail.com</string>
   <string name="NextBlock">Prossimo:</string>
   <string name="NextBlockDesc">Mostra il blocco successivo</string>
   <string name="PointsText">Punti:</string>
@@ -25,30 +15,12 @@
   <string name="theme_text">Tema:</string>
   <string name="difficulty_setting_text">Difficoltà:</string>
   <string name="name_text">Nome:</string>
-  <string name="hint_name">jhondoe</string>
-  <string name="LowLevelButton">Basso</string>
-  <string name="MediumLevelButton">medio</string>
-  <string name="HighLevelButton">Alto</string>
-  <string name="pause_info">mettere in pausa lo stato attuale del gioco</string>
-  <string name="resumingin">Ripresa del gioco...</string>
+  <string name="resumingin">Ripresa del gioco…</string>
   <string name="opening_mail">Apertura dell\'app di posta</string>
   <string name="error_opening_mail">Errore durante l\'apertura dell\'app di posta!</string>
-  <string name="score">Punto:</string>
   <string name="ok">OK</string>
   <string name="cancel">Annulla</string>
   <string name="quitAppMessage">Vuoi davvero lasciare Tetris?</string>
-  <string name="theme_image_information">Un\'immagine che mostra il blocco T sul tema corrente</string>
-  <string name="level_image_description">Immagine che mostra il livello di difficoltà</string>
-  <string name="other_settings_text">Altro:</string>
-  <string name="theme_spinner_description">Valori tematici diversi</string>
-  <string name="settings_info">Impostazioni</string>
-  <string name="results">Risultati</string>
-  <string name="information_text">Informazione</string>
-  <string name="tetris_explanation">In Tetris, i giocatori completano le linee muovendo pezzi di forma diversa (tetromini), che scendono sul campo di gioco. \n\n
-        Le linee completate scompaiono e garantiscono punti al giocatore, che può procedere a riempire gli spazi vuoti.\n\n
-        Il gioco termina quando il campo di gioco è pieno. Più a lungo il giocatore può ritardare questo risultato, più alto sarà il suo punteggio.\n\n
-        </string>
-  <string name="go_back_button">Indietro</string>
   <string name="warning">Avvertimento!</string>
   <string name="down_movement">"movimento verso il basso"</string>
   <string name="left_movement">"movimento a sinistra"</string>
@@ -72,16 +44,8 @@
   <string name="audio_and_image">Audio e immagine</string>
   <string name="player_text">Giocatore:</string>
   <string name="name_default">Giocatore</string>
-  <string name="historial">Documentazione</string>
-  <string name="deleted_player_game">Gioco del giocatore eliminato</string>
-  <string name="deletion_canceled">Cancellazione annullata!</string>
-  <string name="delete_game_warning">Sei sicuro di voler eliminare il gioco da %s?</string>
   <string name="error_name_length_is_out_of_bounds">Il nome è troppo grande!</string>
   <string name="error_name_has_to_be_one_line">Il nome deve essere una riga</string>
-  <string name="search">ricerca</string>
-  <string name="filter_by_name">Filtra per nome</string>
-  <string name="please_click_item">Per favore, clicca su un elemento per vedere il registro</string>
-  <string name="no_items_in_database">Non ci sono elementi nel database, impossibile mostrare il registro!</string>
   <string name="main_menu_activity_play_the_game">Inizio</string>
   <string name="main_menu_activity_unlocked_gallery">Galleria di immagini</string>
   <string name="main_menu_activity_more_apps">Altre app come questa</string>

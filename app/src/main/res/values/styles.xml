@@ -16,13 +16,6 @@
   -->
 
 <resources>
-    <!-- TextView style -->
-    <style name="Widget.TipTime.TextView" parent="Widget.MaterialComponents.TextView">
-        <item name="android:minHeight">48dp</item>
-        <item name="android:gravity">center_vertical</item>
-        <item name="android:textAppearance">?attr/textAppearanceBody1</item>
-    </style>
-
     <!-- Radio Button style -->
     <style name="Widget.TipTime.CompoundButton.RadioButton" parent="Widget.MaterialComponents.CompoundButton.RadioButton">
         <item name="android:paddingStart">8dp</item>
@@ -36,10 +29,6 @@
         <item name="android:textAppearance">?attr/textAppearanceBody1</item>
     </style>
 
-    <style name="main_menu_button">
-        <item name="android:background">@drawable/btn_default</item>
-    </style>
-
     <style name="movebuttonspadding">
         <item name="android:layout_marginLeft">5dp</item>
         <item name="android:layout_marginRight">5dp</item>
@@ -48,6 +37,12 @@
     <style name="rotatebuttonspadding">
         <item name="android:layout_marginLeft">10dp</item>
         <item name="android:layout_marginRight">10dp</item>
+    </style>
+
+    <!-- Used by activities whose root layout already paints an opaque
+         background - avoid the window painting its own on top. -->
+    <style name="AppTheme.NoWindowBackground">
+        <item name="android:windowBackground">@null</item>
     </style>
 
 </resources>

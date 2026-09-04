@@ -9,6 +9,7 @@ import android.graphics.PorterDuff
 import android.graphics.PorterDuffXfermode
 import android.graphics.Rect
 import android.graphics.RectF
+import androidx.core.graphics.createBitmap
 import com.batodev.tetris.infra.settings.SettingsHelper
 import java.io.InputStream
 import java.math.BigDecimal
@@ -92,11 +93,9 @@ object ImageHelper {
         pixels: Int,
     ): Bitmap {
         val output =
-            Bitmap.createBitmap(
+            createBitmap(
                 bitmap.width,
-                bitmap
-                    .height,
-                Bitmap.Config.ARGB_8888,
+                bitmap.height,
             )
         val canvas = Canvas(output)
         val color = -0xbdbdbe

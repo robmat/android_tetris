@@ -1,21 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
 
-  <string name="help_button">मदद</string>
-  <string name="start_button">शुरू</string>
-  <string name="quit_button">छोड़ना</string>
   <string name="LeftButtonDesc">ब्लॉक को बाईं ओर ले जाएं</string>
   <string name="DownButtonDesc">ब्लॉक को नीचे ले जाएँ</string>
   <string name="RightButtonDesc">ब्लॉक को दाईं ओर ले जाएं</string>
   <string name="RotateLeftDesc">ब्लॉक को बाईं ओर घुमाएँ</string>
   <string name="RotateRightDesc">ब्लॉक को दाईं ओर घुमाएँ</string>
-  <string name="DayAndHourText">दिन और घंटा:</string>
-  <string name="valuesOfLogText">लॉग का मान:</string>
-  <string name="emailDestination">अपना स्कोर साझा करें:</string>
-  <string name="sendEmailButton">ईमेल भेजें</string>
-  <string name="newGameButton">नया खेल</string>
-  <string name="exitButton">बाहर निकलना</string>
-  <string name="emailHint">jhondoe@gmail.com</string>
   <string name="NextBlock">अगला:</string>
   <string name="NextBlockDesc">अगला ब्लॉक दिखाता है</string>
   <string name="PointsText">अंक:</string>
@@ -25,30 +15,12 @@
   <string name="theme_text">विषय:</string>
   <string name="difficulty_setting_text">कठिनाई:</string>
   <string name="name_text">नाम:</string>
-  <string name="hint_name">झोंदोए</string>
-  <string name="LowLevelButton">कम</string>
-  <string name="MediumLevelButton">मध्यम</string>
-  <string name="HighLevelButton">उच्च</string>
-  <string name="pause_info">खेल की वर्तमान स्थिति को रोकें</string>
-  <string name="resumingin">खेल फिर से शुरू हो रहा है...</string>
+  <string name="resumingin">खेल फिर से शुरू हो रहा है…</string>
   <string name="opening_mail">मेल ऐप खुल रहा है</string>
   <string name="error_opening_mail">मेल ऐप खोलने में त्रुटि!</string>
-  <string name="score">अंक:</string>
   <string name="ok">ठीक है</string>
   <string name="cancel">रद्द करना</string>
   <string name="quitAppMessage">क्या आप सचमुच टेट्रिस छोड़ना चाहते हैं?</string>
-  <string name="theme_image_information">एक छवि जो वर्तमान थीम पर टी ब्लॉक दिखाती है</string>
-  <string name="level_image_description">वह छवि जो कठिनाई का स्तर दर्शाती है</string>
-  <string name="other_settings_text">अन्य:</string>
-  <string name="theme_spinner_description">विभिन्न विषय मूल्य</string>
-  <string name="settings_info">समायोजन</string>
-  <string name="results">परिणाम</string>
-  <string name="information_text">जानकारी</string>
-  <string name="tetris_explanation">टेट्रिस में, खिलाड़ी अलग-अलग आकार के टुकड़ों (टेट्रोमिनो) को घुमाकर लाइनें पूरी करते हैं, जो खेल के मैदान पर उतरते हैं। \n\n
-        पूरी की गई लाइनें गायब हो जाती हैं और खिलाड़ी को अंक मिलते हैं, और खिलाड़ी खाली स्थानों को भरने के लिए आगे बढ़ सकता है।\n\n
-        खेल का मैदान भर जाने पर खेल समाप्त हो जाता है। खिलाड़ी इस परिणाम में जितनी देर करेगा, उसका स्कोर उतना ही अधिक होगा।\n\n
-        </string>
-  <string name="go_back_button">पीछे</string>
   <string name="warning">चेतावनी!</string>
   <string name="down_movement">"डाउन मूवमेंट"</string>
   <string name="left_movement">"वामपंथ आंदोलन"</string>
@@ -71,16 +43,8 @@
   <string name="audio_and_image">ऑडियो और छवि</string>
   <string name="player_text">खिलाड़ी:</string>
   <string name="name_default">खिलाड़ी</string>
-  <string name="historial">अभिलेख</string>
-  <string name="deleted_player_game">नष्ट किया गया खिलाड़ी खेल</string>
-  <string name="deletion_canceled">विलोपन रद्द!</string>
-  <string name="delete_game_warning">क्या आप वाकई गेम को %s से हटाना चाहते हैं?</string>
   <string name="error_name_length_is_out_of_bounds">नाम बहुत बड़ा है!</string>
   <string name="error_name_has_to_be_one_line">नाम एक पंक्ति का होना चाहिए</string>
-  <string name="search">खोज</string>
-  <string name="filter_by_name">नाम से फ़िल्टर करें</string>
-  <string name="please_click_item">कृपया लॉग देखने के लिए किसी आइटम पर क्लिक करें</string>
-  <string name="no_items_in_database">डेटाबेस में कोई आइटम नहीं है, लॉग नहीं दिखाया जा सकता!</string>
   <string name="main_menu_activity_play_the_game">शुरू</string>
   <string name="main_menu_activity_unlocked_gallery">चित्र गैलरी</string>
   <string name="main_menu_activity_more_apps">इस तरह के और भी ऐप्स</string>

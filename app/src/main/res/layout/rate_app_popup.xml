@@ -1,12 +1,16 @@
 <!-- popup_rate_app.xml -->
+<!-- Inflated into a PopupWindow (see RateAppHelper), not an Activity window root,
+     so the background here does not overdraw a theme window background. -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:gravity="center"
     android:background="@drawable/btn_default"
     android:orientation="vertical"
-    android:padding="60dp">
+    android:padding="60dp"
+    tools:ignore="Overdraw">
 
     <TextView
         android:layout_width="wrap_content"

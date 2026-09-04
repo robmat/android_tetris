@@ -26,7 +26,7 @@ class NeonImageChooser(
         val layoutInflater =
             context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         if (convertView == null) {
-            convertView = layoutInflater.inflate(R.layout.grid_item_image, null)
+            convertView = layoutInflater.inflate(R.layout.grid_item_image, parent, false)
         }
         val imageView: ImageView = convertView!!.findViewById(R.id.grid_item_image)
         imageView.setImageResource(getResourceForCell(gameCell))

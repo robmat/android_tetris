@@ -30,6 +30,7 @@ import com.google.android.gms.ads.AdView
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.Job
 import java.util.Date
+import java.util.Locale
 
 const val IMAGES_WON_THIS_GAME = "IMAGES_WON_THIS_GAME"
 
@@ -91,7 +92,8 @@ class GameFragment :
         fun updateScreen() {
             adapter.gameCells = model.getGrid()
             adapter.notifyDataSetChanged()
-            requireView().findViewById<TextView>(R.id.PointsText).text = model.getPoints().toString()
+            requireView().findViewById<TextView>(R.id.PointsText).text =
+                String.format(Locale.getDefault(), "%d", model.getPoints())
             val typeOfBlock = model.getNextBlock()
             requireView().findViewById<ImageView>(R.id.NextBlockImage).setImageResource(
                 SettingsSingleton
