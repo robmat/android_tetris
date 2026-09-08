@@ -20,7 +20,11 @@ class MainActivity :
     HideStatusBarActivity(),
     View.OnClickListener {
     private lateinit var binding: ActivityMainBinding
-    private val viewModel: MainModel = MainModel()
+
+    // internal (not private): MainMenuTest registers an IdlingResource polling
+    // isLoading, so Espresso waits for the splash's real-time delay() to clear
+    // before interacting - same-module androidTest can see `internal` members.
+    internal val viewModel: MainModel = MainModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen().apply {
