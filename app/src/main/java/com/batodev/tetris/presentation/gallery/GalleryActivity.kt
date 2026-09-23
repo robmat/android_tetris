@@ -8,10 +8,13 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
 import android.view.Window
 import android.widget.Button
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import com.batodev.tetris.R
 import com.batodev.tetris.infra.helpers.AdHelper
 import com.batodev.tetris.infra.helpers.RateAppHelper
@@ -45,6 +48,23 @@ class GalleryActivity : Activity() {
         setImage(index)
         findViewById<AdView>(R.id.gallery_ad).loadAd(AdRequest.Builder().build())
         checkIfImageLeftRightButtonsShouldBeVisible()
+        avoidNavigationBarOverlap(findViewById(R.id.gallery_back_btn))
+        avoidNavigationBarOverlap(findViewById(R.id.gallery_share))
+    }
+
+    /**
+     * The system navigation bar can overlay this screen (it isn't hidden here, unlike the
+     * rest of the app), so bottom-pinned buttons need their margin padded by the nav bar
+     * inset or they render partly underneath it and become untappable.
+     */
+    private fun avoidNavigationBarOverlap(view: View) {
+        val baseBottomMargin = (view.layoutParams as ViewGroup.MarginLayoutParams).bottomMargin
+        ViewCompat.setOnApplyWindowInsetsListener(view) { v, insets ->
+            val navBarBottom = insets.getInsets(WindowInsetsCompat.Type.navigationBars()).bottom
+            (v.layoutParams as ViewGroup.MarginLayoutParams).bottomMargin = baseBottomMargin + navBarBottom
+            v.requestLayout()
+            insets
+        }
     }
 
     fun backClicked(ignored: View) {
