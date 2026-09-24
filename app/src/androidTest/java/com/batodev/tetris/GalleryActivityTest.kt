@@ -1,5 +1,7 @@
 package com.batodev.tetris
 
+import android.app.Activity
+import android.app.Instrumentation.ActivityResult
 import android.content.Intent
 import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView
@@ -7,8 +9,10 @@ import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.intent.Intents
 import androidx.test.espresso.intent.Intents.intended
+import androidx.test.espresso.intent.Intents.intending
 import androidx.test.espresso.intent.matcher.IntentMatchers.hasAction
 import androidx.test.espresso.intent.matcher.IntentMatchers.hasType
+import androidx.test.espresso.intent.matcher.IntentMatchers.isInternal
 import androidx.test.espresso.matcher.ViewMatchers.Visibility.GONE
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withEffectiveVisibility
@@ -18,6 +22,7 @@ import androidx.test.platform.app.InstrumentationRegistry
 import com.batodev.tetris.infra.settings.SettingsHelper
 import com.batodev.tetris.presentation.gallery.GalleryActivity
 import com.batodev.tetris.presentation.gallery.IMAGES
+import org.hamcrest.CoreMatchers.not
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -49,6 +54,12 @@ class GalleryActivityTest {
                 .take(3)
                 .toTypedArray()
         Intents.init()
+        // Espresso-Intents only *records* outgoing intents; anything not matched by an intending()
+        // stub is still dispatched for real. On a physical device that opens the Play Store on top
+        // of the app, so the next interaction fails with NoActivityResumedException - or the run
+        // wedges until the harness watchdog kills it. Stub external intents only: the app's own
+        // activity launches must still happen, since tests assert on the screens they open.
+        intending(not(isInternal())).respondWith(ActivityResult(Activity.RESULT_OK, null))
     }
 
     @After
